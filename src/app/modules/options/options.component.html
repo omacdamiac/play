@@ -1,0 +1,20 @@
+<div *ngIf="display" class="dialog-content d-flex align-items-center justify-content-center">
+    <div class="dialog text-center">
+        <span *ngIf="respuesta">CORRECTO</span>    
+        <span *ngIf="!respuesta">INCORRECTO</span>    
+        <hr>
+        <button (click)="next()">Siguiente</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <p>¿Es una {{ categoriaCurrent[0].name }}?</p>
+        <img src="../../../assets/categorias/{{ categoriaCurrent[0].img }}.png" alt="">
+        <hr>
+        <button (click)="validar(true)">SI</button>
+        <button (click)="validar(false)">NO</button>
+        <hr>
+        <button (click)="next()">siguiente fruta</button>
+        <a routerLink="/dashboard">volver al menú</a>
+    </div>
+</div>

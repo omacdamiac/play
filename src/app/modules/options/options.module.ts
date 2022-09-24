@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryComponent } from './category.component';
+import { OptionsComponent } from './options.component';
 
 
 
 @NgModule({
   declarations: [
-    CategoryComponent
+    OptionsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class OptionsModule { }

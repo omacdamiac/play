@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  selector: 'app-options',
+  templateUrl: './options.component.html',
+  styleUrls: ['./options.component.scss'],
 })
-export class CategoryComponent implements OnInit {
-
+export class OptionsComponent implements OnInit {
   categorias = [
     {
       id: 1,
@@ -136,23 +135,40 @@ export class CategoryComponent implements OnInit {
     },
   ];
 
-  category = of(this.categorias)
-  options: any;
-  constructor(
-    private router: Router,
-  ) { }
+  category = of(this.categorias);
+  display: boolean;
+  respuesta!: boolean;
+  current: any;
+  categoriaCurrent!: any;
+  constructor(private route: ActivatedRoute) {
+    this.display = false;
+    this.current = this.route.snapshot.paramMap.get('item');
+  }
 
   ngOnInit(): void {
     this.category.subscribe({
-      next: response => {
-        console.log(response)
-        this.options = response;
-      }
-    })
+      next: (response: any) => {
+         response.filter((e: any) => {
+          if(e.name === this.current) {
+            this.categoriaCurrent = e.options;
+          }
+        })
+      },
+    });
+    console.log(this.categoriaCurrent);
   }
 
-  setOption() {
-    this.router.navigate(['/dashboard/options'])
+  validar(value: boolean): void {
+    console.log(value);
+    this.display = true;
+    if (value) {
+      this.respuesta = true;
+    } else {
+      this.respuesta = false;
+    }
   }
 
+  next() {
+    this.display = false;
+  }
 }

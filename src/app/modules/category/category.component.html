@@ -1,1 +1,18 @@
-<p>category works!</p>
+<img src="../../../assets/ninio.png" class="bg-ninio" alt="">
+<div class="row">
+    <div class="col-12">
+        <h2>Bienvenidos a E-Learning</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 offset-6">
+        <ol>
+            <li *ngFor="let option of options">
+                <!-- <a (click)="setOption()">{{ option.name }}</a> -->
+                <a [routerLink]="['/dashboard/categoria/', option.name]">{{ option.name }}</a>
+                <!-- <img src="../../../assets/{{option.name}}.jpg" alt="" /> -->
+            </li>
+        </ol>
+        <hr>
+    </div>
+</div>
