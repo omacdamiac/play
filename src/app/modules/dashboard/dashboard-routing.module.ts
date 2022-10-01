@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 const routes: Routes = [{path: '', component: DashboardComponent,
 children: [
   {path:'', component: CategoryComponent},
-  {path:'categoria/:item', component: OptionsComponent}
+  {path:'category/:item', component: OptionsComponent}
 ]
 }];
 

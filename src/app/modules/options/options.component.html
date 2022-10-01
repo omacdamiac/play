@@ -3,18 +3,18 @@
         <span *ngIf="respuesta">CORRECTO</span>    
         <span *ngIf="!respuesta">INCORRECTO</span>    
         <hr>
-        <button (click)="next()">Siguiente</button>
+        <button (click)="nextTo()">Siguiente</button>
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="currentItem">
     <div class="col-12 text-center">
-        <p>¿Es una {{ categoriaCurrent[0].name }}?</p>
-        <img src="../../../assets/categorias/{{ categoriaCurrent[0].img }}.png" alt="">
+        <p>¿Es un(a) {{ currentItem?.name }}?</p>
+        <img src="./assets/categorias/{{ currentItem?.img }}.png" alt="">
         <hr>
         <button (click)="validar(true)">SI</button>
         <button (click)="validar(false)">NO</button>
         <hr>
-        <button (click)="next()">siguiente fruta</button>
+        <button (click)="nextTo()">siguiente</button>
         <a routerLink="/dashboard">volver al menú</a>
     </div>
 </div>
