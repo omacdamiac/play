@@ -10,9 +10,7 @@ import { ICategory, IOptions } from '../../models/options.model';
 })
 export class LearningService {
   state: any = {
-    item1: undefined,
-    item2: undefined,
-    item3: undefined,
+  
   };
 options = new BehaviorSubject<any>([]);
 options$ = this.options.asObservable();
@@ -31,7 +29,7 @@ options$ = this.options.asObservable();
   }
 
   setState(data: any) {
-		this.state = Object.assign({ ...this.state, ...data });
+		this.state = Object.values({ ...this.state, ...data });
 		this.options.next(this.state);
 	}
 

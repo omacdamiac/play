@@ -11,10 +11,10 @@
         <p>¿Es un(a) {{ currentItem?.name }}?</p>
         <img src="./assets/categorias/{{ currentItem?.img }}.png" alt="">
         <hr>
-        <button (click)="validar(true)">SI</button>
-        <button (click)="validar(false)">NO</button>
+        <button (click)="validateOption(currentItem, true)">SI</button>
+        <button (click)="validateOption(currentItem, false)">NO</button>
         <hr>
-        <button (click)="nextTo()">siguiente</button>
+        <button (click)="validateOption(currentItem, null)">siguiente</button>
         <a routerLink="/dashboard">volver al menú</a>
     </div>
 </div>

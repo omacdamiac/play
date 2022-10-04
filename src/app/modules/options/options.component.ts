@@ -27,7 +27,6 @@ export class OptionsComponent implements OnInit {
     this.getCategory();
     setTimeout(() => {
       console.log(this.currentItem);
-      
     }, 2000);
   }
 
@@ -48,30 +47,20 @@ export class OptionsComponent implements OnInit {
     return this.categoriaCurrent[r];
   }
 
-  validar(value: boolean): void {
-    console.log(value);
+  validateOption(item: IOptions, value: boolean | null): void {
     this.display = true;
-    if (value) {
-      this.respuesta = true;
-    } else {
-      this.respuesta = false;
-    }
+    // if (value) {
+    //   this.respuesta = true;
+    // } else {
+    //   this.respuesta = false;
+    // }
 
-    this.learningService.setState({
-      item1:{
-        id: '1',
-        name: "Auto",
-        img: "auto"
-    }
+    const data = { ...item, ...{ answer: value } };
+    // console.log(data);
 
-    }
+    this.learningService.setState({ data });
 
-      )
-
-
-  console.log(this.learningService.getState())
-  
-  
+    console.log(this.learningService.getState());
   }
 
   nextTo() {
