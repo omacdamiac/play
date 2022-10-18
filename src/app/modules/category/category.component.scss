@@ -1,20 +1,64 @@
-img{
+@import '../../../scss/fonts';
+@import '../../../scss/variables';
+img {
     width: 100px;
     height: auto;
-}   
-.bg-ninio{
+}
+.bg-ninio {
+    background: url(../../../assets/boy.png);
     background-size: cover;
-    height: auto;
-    width: 30%;
+    height: 434px;
+    width: 442px;
     position: absolute;
     bottom: 0;
+    left: 15%;
 }
 
-ol{
-    li{
-        margin-bottom: 20px;
-        a{
+ul {
+    padding: 0;
+    li {
+        list-style: none;
+        display: inline-block;
+        width: 369px;
+        height: 201px;
+        a {
+            font-size: 2.6rem;
+            background: url(../../../assets/nube.png);
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            text-align: center;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover{
+                color: $orange;
+                font-size: 3rem;
+                transform: rotate(4deg);
+            }
+            & span{
+                display: table-cell; 
+                position: relative; 
+                -webkit-text-stroke: 3px $purple;
+                &:after {    
+                    background: none repeat scroll 0 0 transparent;
+                    bottom: 0;
+                    content: "";
+                    display: block;
+                    height: 7px;
+                    border-radius: 10px;
+                    left: 50%;
+                    position: absolute;
+                    background: $purple;
+                    transition: width 0.5s ease 0s, left 0.5s ease 0s;
+                    width: 0;
+                  }
+                  &:hover:after { 
+                    width: 100%; 
+                    left: 0; 
+                  }
+            }
         }
     }
 }

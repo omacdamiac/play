@@ -6,15 +6,38 @@
         <button (click)="nextTo()">Siguiente</button>
     </div>
 </div>
-<div class="row" *ngIf="currentItem">
-    <div class="col-12 text-center">
-        <p>¿Es un(a) {{ currentItem?.name }}?</p>
-        <img src="./assets/categorias/{{ currentItem?.img }}.png" alt="">
+<div *ngIf="displayCongratulation" class="dialog-content d-flex align-items-center justify-content-center">
+    <div class="dialog text-center">
+        <h2>CONGRATULATION</h2>    
         <hr>
-        <button (click)="validateOption(currentItem, true)">SI</button>
-        <button (click)="validateOption(currentItem, false)">NO</button>
-        <hr>
-        <button (click)="validateOption(currentItem, null)">siguiente</button>
         <a routerLink="/dashboard">volver al menú</a>
     </div>
+</div>
+
+<div class="row" *ngIf="currentItem">
+    <div class="col-12 text-center">
+        <h1>¿Es un(a) {{ currentItem?.name }}?</h1>
+        <div class="cdr">
+            <div class="cdr__content">
+                <img src="./assets/categorias/{{ currentItem?.img }}.png" alt="">
+            </div>
+        </div>
+        
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="row">
+    <div class="col-4 offset-4 text-center">
+        <button class="btn_trn" (click)="validate(currentItem, true)">{{ btn_yes }}</button>
+        <button class="btn_trn" (click)="validate(currentItem, false)">{{ btn_not }}</button>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="row">
+    <div class="col-12 text-end">
+        <button class="btn_next" (click)="validate(currentItem, null)">{{ btn_next }}</button>
+        <a routerLink="/dashboard">{{ link_main }}</a>
+
+    </div>
+    <div class="clearfix"></div>
 </div>

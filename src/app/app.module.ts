@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { LearningService } from './core/services/learning/learning.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Interceptor } from './core/interceptors/interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -14,11 +15,16 @@ import { LearningService } from './core/services/learning/learning.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
   ],
   providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-    LearningService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true,
+    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
   bootstrap: [AppComponent]
 })

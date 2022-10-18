@@ -1,0 +1,6 @@
+export const BTN_BACK = '< Regresar'
+export const BTN_NEXT = 'Siguiente >'
+export const BTN_YES = 'SI'
+export const BTN_NOT = 'NO'
+export const LINK_GO_MAIN = 'Volver al menU'
+export const TITLE_CATEGORY = 'Debes elegir una categoria'

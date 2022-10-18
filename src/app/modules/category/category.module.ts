@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryComponent } from './category.component';
-
+import { LearningService } from 'src/app/core/services/learning/learning.service';
 
 
 @NgModule({
@@ -10,6 +10,9 @@ import { CategoryComponent } from './category.component';
   ],
   imports: [
     CommonModule
+  ],
+  providers: [
+    LearningService,
   ]
 })
 export class CategoryModule { }

@@ -9,3 +9,10 @@ export class IOptions {
   name!: string;
   img!: string;
 }
+
+export class IOptionsData {
+  id!: string;
+  name!: string;
+  img!: string;
+  answer!: boolean | null;
+}

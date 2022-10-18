@@ -1,3 +1,4 @@
+@import '../../../scss/variables';
 img {
     width: 150px;
     height: auto;
@@ -16,4 +17,82 @@ img {
         height: 200px;
         background: white;
     }
+}
+
+.btn{
+    &_next{
+        background: transparent;
+        width: auto;
+        padding: 0 15px;
+        height: 70px;
+        border: 0;
+        background-color: $purple_light;
+        -moz-border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+        -webkit-border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+        border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+        box-shadow: -10px 10px 0px $purple;
+        font-size: 30px;
+        color: $magenta;
+        -webkit-text-stroke: 1px $purple;
+        border: 1px solid $purple;
+        margin-right: 20px;
+    }
+    &_trn{
+        background: transparent;
+        width: 126px;
+        height: 70px;
+        border: 0;
+        background-color: $purple_light;
+        -moz-border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+        -webkit-border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+        border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+        box-shadow: -10px 10px 0px $purple;
+        font-size: 50px;
+        color: $magenta;
+        -webkit-text-stroke: 3px $purple;
+        border: 1px solid $purple;
+        margin-left: 20px;
+    }
+
+}
+
+.cdr{
+    background: $magenta;
+    border-radius: 10px;
+    width: 400px;
+    margin: auto;
+    height: 280px;
+    transform: rotate(-4deg);
+    position: relative;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    box-shadow: -10px 10px 0px $purple;
+    margin-bottom: 60px;
+    &:before{
+        content: '';
+        background: $magenta;
+        width: 100px;
+        height: 100px;
+        display: block;
+        border-radius: 15px;
+        position: absolute;
+        left: 50%;
+        margin-left: -50px;
+        transform: rotate(-45deg);
+        bottom: -43px;
+        box-shadow: -10px 1px 0px $purple;
+    }
+    &__content{
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(4deg);
+        height: auto;
+        background: white;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
 }

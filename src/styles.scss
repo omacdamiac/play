@@ -1,5 +1,33 @@
+@import './scss/fonts';
+@import './scss/variables';
 body{
-    background: #0dcaf0;
+    font-size: $font-size;
+    font-family: 'Milky Coffee';
+    color: $orange;
+    background-image: radial-gradient(circle, #6101a1, #56018f, #4b017d, #40016b, #36015a);
+}
+.corner{
+    background: url(./assets/corner.png);
+    width: 274px;
+    height: 356px;
+    position: absolute;
+    z-index: -1;
+    &_top{
+        @extend .corner;
+        right: 0;
+        top: 0;
+    }
+    &_bottom{
+        @extend .corner;
+        left: 0;
+        bottom: 0;    
+        transform: rotate(180deg);
+    }
+}
+a{
+    color: #ff01c2;
+    text-decoration: none;
+    display: contents;
 }
 .bor{
     border: 3px dashed white;

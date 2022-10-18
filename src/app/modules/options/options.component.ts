@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { ICategory, IOptions } from 'src/app/core/models/options.model';
+import { BTN_NEXT, BTN_NOT, BTN_YES, LINK_GO_MAIN } from 'src/app/core/constants/text.const';
+import {
+  ICategory,
+  IOptions,
+  IOptionsData,
+} from 'src/app/core/models/options.model';
 import { LearningService } from 'src/app/core/services/learning/learning.service';
 
 @Component({
@@ -10,30 +14,36 @@ import { LearningService } from 'src/app/core/services/learning/learning.service
   styleUrls: ['./options.component.scss'],
 })
 export class OptionsComponent implements OnInit {
+  btn_next: string;
+  btn_yes: string;
+  btn_not: string;
+  link_main: string;
   display: boolean;
+  displayCongratulation: boolean;
   respuesta!: boolean;
   id: any;
-  categoriaCurrent!: any;
+  categoriaCurrent!: IOptions[];
   currentItem: any;
   constructor(
     private route: ActivatedRoute,
     private learningService: LearningService
   ) {
     this.display = false;
+    this.displayCongratulation = false;
     this.id = this.route.snapshot.paramMap.get('item');
+    this.btn_next = BTN_NEXT;
+    this.btn_yes = BTN_YES;
+    this.btn_not = BTN_NOT;
+    this.link_main = LINK_GO_MAIN;
   }
 
   ngOnInit(): void {
     this.getCategory();
-    setTimeout(() => {
-      console.log(this.currentItem);
-    }, 2000);
   }
 
   getCategory() {
     this.learningService.getOption(this.id).subscribe({
       next: (response: ICategory) => {
-        console.log(response.options);
         this.categoriaCurrent = response.options;
         this.currentItem = this.updateRandomImage();
       },
@@ -47,24 +57,71 @@ export class OptionsComponent implements OnInit {
     return this.categoriaCurrent[r];
   }
 
-  validateOption(item: IOptions, value: boolean | null): void {
-    this.display = true;
-    // if (value) {
-    //   this.respuesta = true;
-    // } else {
-    //   this.respuesta = false;
-    // }
+  validate(item: IOptions, value: boolean | null): void {
+    console.log(this.categoriaCurrent);
+    this.categoriaCurrent.filter((element: IOptions) => {
+      if (element.id === item.id) {
+        this.removeItemFromArr(this.categoriaCurrent, element);
+      }
+    });
+    const max = this.categoriaCurrent.length;
+    console.log(max);
 
     const data = { ...item, ...{ answer: value } };
-    // console.log(data);
+    this.validateOption(data);
 
-    this.learningService.setState({ data });
+    if (max === 0) {
+      this.learningService.clearState();
+      this.displayCongratulation = true;
+    } else {
+      if (value === null) {
+        this.display = false;
+        this.nextTo();
+      } else if(value) {
+        this.display = true;
+        this.respuesta = true;
+      } else {
+        this.display = true;
+        this.respuesta = false;
+
+      }
+    }
+  }
+
+  nextTo() {
+    this.currentItem = this.updateRandomImage(0);
+    this.display = false;
+  }
+
+  validateOption(data: IOptionsData) {
+    switch (Number(data.id)) {
+      case 2:
+        this.learningService.setState({ item2: data });
+        break;
+      case 3:
+        this.learningService.setState({ item3: data });
+        break;
+      case 4:
+        this.learningService.setState({ item4: data });
+        break;
+      case 5:
+        this.learningService.setState({ item5: data });
+        break;
+
+      default:
+        this.learningService.setState({ item: data });
+        break;
+    }
 
     console.log(this.learningService.getState());
   }
 
-  nextTo() {
-    this.currentItem = this.updateRandomImage(1);
-    this.display = false;
+  removeItemFromArr(arr: IOptions[], item: IOptions) {
+    var i = arr.indexOf(item);
+    arr.splice(i, 1);
   }
+
+  // ngOnDestroy() {
+  //   this.learningService.options.unsubscribe();
+  // }
 }

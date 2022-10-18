@@ -1,18 +1,21 @@
-<img src="./assets/ninio.png" class="bg-ninio" alt="">
+<!-- <img src="./assets/ninio.png" class="bg-ninio" alt=""> -->
+<div class="bg-ninio"></div>
 <div class="row">
-    <div class="col-12">
-        <h2>Bienvenidos a E-Learning</h2>
+    <div class="col-12 text-center">
+        <h1>{{ title }}</h1>
     </div>
 </div>
 <div class="row">
-    <div class="col-5 offset-6">
-        <ol>
-            <li *ngFor="let option of options">
+    <div class="col-7 offset-5">
+        <ul>
+            <li *ngFor="let option of options" @enterState>
+                <!-- <img src="../../../assets/cartel.png" alt=""> -->
                 <!-- <a (click)="setOption()">{{ option.name }}</a> -->
-                <a [routerLink]="['/dashboard/category', option.id]">{{ option.name }}</a>
+                <a [routerLink]="['/dashboard/category', option.id]">
+                    <span>{{ option.name }}</span>
+                </a>
                 <!-- <img src="../../../assets/{{option.name}}.jpg" alt="" /> -->
             </li>
-        </ol>
-        <hr>
+        </ul>
     </div>
 </div>
