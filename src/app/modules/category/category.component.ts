@@ -10,25 +10,32 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
   animations: [
-    trigger('enterState',[
-      state('void', style({
-        transform: 'translateX(-100%)',
-        height: '200px',
-        opacity: 0,
-      })),
+    trigger('enterState', [
+      state(
+        'void',
+        style({
+          transform: 'translateX(-100%)',
+          height: '200px',
+          opacity: 0,
+        })
+      ),
       transition(':enter', [
-        animate(300, style({
-          transform: 'translateX(0)',
-          opacity: 1
-        }))
-      ])
-    ])
-  ]
+        animate(
+          300,
+          style({
+            transform: 'translateX(0)',
+            opacity: 1,
+          })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class CategoryComponent implements OnInit {
   isOpen = false;
@@ -36,14 +43,17 @@ export class CategoryComponent implements OnInit {
   options: any;
   constructor(
     private router: Router,
-    private learningService: LearningService,
+    private learningService: LearningService
   ) {
     this.title = TITLE_CATEGORY;
   }
 
   ngOnInit(): void {
+
     this.learningService.getOptions().subscribe({
       next: (response: ICategory[]) => {
+        this.learningService.setStateDisplay(false);
+
         console.log(response)
         this.options = response;
       }
@@ -51,11 +61,10 @@ export class CategoryComponent implements OnInit {
   }
 
   setOption() {
-    this.router.navigate(['/dashboard/options'])
+    this.router.navigate(['/dashboard/options']);
   }
 
   toggle() {
     this.isOpen = !this.isOpen;
   }
-
 }

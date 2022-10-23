@@ -15,10 +15,7 @@ export class Interceptor implements HttpInterceptor {
 
   constructor(
     private loaderService: LoaderService,
-  ) {
-    console.log('ENTRO');
-    
-  }
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.loaderService.showLoader()

@@ -73,17 +73,19 @@ export class OptionsComponent implements OnInit {
     if (max === 0) {
       this.learningService.clearState();
       this.displayCongratulation = true;
+      this.learningService.setStateDisplay(true);
     } else {
       if (value === null) {
         this.display = false;
         this.nextTo();
       } else if(value) {
+        this.learningService.setStateDisplay(true);
         this.display = true;
         this.respuesta = true;
       } else {
+        this.learningService.setStateDisplay(true);
         this.display = true;
         this.respuesta = false;
-
       }
     }
   }
@@ -91,6 +93,8 @@ export class OptionsComponent implements OnInit {
   nextTo() {
     this.currentItem = this.updateRandomImage(0);
     this.display = false;
+    this.learningService.setStateDisplay(false);
+
   }
 
   validateOption(data: IOptionsData) {

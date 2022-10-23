@@ -1,13 +1,17 @@
 <app-loader></app-loader>
+<div class="dialog-content" *ngIf="displayModalBG"></div>
 <div class="corner_top"></div>
 <div class="container-fluid h100 p-3">
   <div class="row bar">
-    <a (click)="back()">{{btn}}</a>
+    <div class="d-flex justify-content-between">
+      <!-- <a (click)="back()">{{btn}}</a> -->
+      <a  routerLink="/dashboard">{{btn}}</a>
+      <a  routerLink="/">{{out}}</a>
+
+    </div>
   </div>
   <div class="rounded-3 content">
-    <!-- <div class="col-12 text-center"> -->
     <router-outlet></router-outlet>
-    <!-- </div> -->
   </div>
 </div>
 <div class="corner_bottom"></div>

@@ -1,3 +1,4 @@
+export const BTN_OUT= 'Salir'
 export const BTN_BACK = '< Regresar'
 export const BTN_NEXT = 'Siguiente >'
 export const BTN_YES = 'SI'

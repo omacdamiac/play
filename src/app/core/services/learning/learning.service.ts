@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ENDPOINT } from '../../constants/endpoint';
 import { ICategory } from '../../models/options.model';
@@ -21,12 +21,22 @@ export interface IStateUI {
   item5:
     | { id: number; name: string; img: string; answer: boolean | null }
     | undefined;
-};
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class LearningService {
+  private displayModal = new BehaviorSubject<boolean>(false);
+  displayModal$ = this.displayModal.asObservable();
+  setStateDisplay(data: boolean) {
+    this.displayModal.next(data);
+  }
+
+  getStateDisplay() {
+    return this.displayModal.getValue();
+  }
+
   state: IStateUI = {
     item: undefined,
     item2: undefined,

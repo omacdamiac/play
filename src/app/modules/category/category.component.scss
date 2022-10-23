@@ -1,5 +1,5 @@
-@import '../../../scss/fonts';
-@import '../../../scss/variables';
+@import "../../../scss/fonts";
+@import "../../../scss/variables";
 img {
     width: 100px;
     height: auto;
@@ -12,6 +12,14 @@ img {
     position: absolute;
     bottom: 0;
     left: 15%;
+    @media (max-width: 768px) {
+        width: 50%;
+        background-size: contain;
+        left: 1%;
+        bottom: 0;
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
 }
 
 ul {
@@ -21,6 +29,9 @@ ul {
         display: inline-block;
         width: 369px;
         height: 201px;
+        @media (max-width: 768px) {
+            height: auto;
+        }
         a {
             font-size: 2.6rem;
             background: url(../../../assets/nube.png);
@@ -32,16 +43,27 @@ ul {
             display: flex;
             align-items: center;
             justify-content: center;
-            &:hover{
+            @media (max-width: 768px) {
+                width: 75%;
+                background-size: contain;
+                background-repeat: no-repeat;
+                height: auto;
+                padding: 11% 0;
+            }
+            &:hover {
                 color: $orange;
                 font-size: 3rem;
                 transform: rotate(4deg);
             }
-            & span{
-                display: table-cell; 
-                position: relative; 
+            & span {
+                display: table-cell;
+                position: relative;
                 -webkit-text-stroke: 3px $purple;
-                &:after {    
+                @media (max-width: 768px) {
+                    font-size: 2.1rem;
+                    -webkit-text-stroke: 2px $purple;
+                }
+                &:after {
                     background: none repeat scroll 0 0 transparent;
                     bottom: 0;
                     content: "";
@@ -53,11 +75,11 @@ ul {
                     background: $purple;
                     transition: width 0.5s ease 0s, left 0.5s ease 0s;
                     width: 0;
-                  }
-                  &:hover:after { 
-                    width: 100%; 
-                    left: 0; 
-                  }
+                }
+                &:hover:after {
+                    width: 100%;
+                    left: 0;
+                }
             }
         }
     }

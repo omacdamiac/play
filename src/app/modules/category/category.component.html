@@ -1,21 +1,19 @@
-<!-- <img src="./assets/ninio.png" class="bg-ninio" alt=""> -->
 <div class="bg-ninio"></div>
 <div class="row">
     <div class="col-12 text-center">
         <h1>{{ title }}</h1>
     </div>
+    <div class="clearfix"></div>
 </div>
 <div class="row">
-    <div class="col-7 offset-5">
+    <div class="col-8 offset-2 col-md-7 offset-md-5">
         <ul>
             <li *ngFor="let option of options" @enterState>
-                <!-- <img src="../../../assets/cartel.png" alt=""> -->
-                <!-- <a (click)="setOption()">{{ option.name }}</a> -->
                 <a [routerLink]="['/dashboard/category', option.id]">
                     <span>{{ option.name }}</span>
                 </a>
-                <!-- <img src="../../../assets/{{option.name}}.jpg" alt="" /> -->
             </li>
         </ul>
     </div>
+    <div class="clearfix"></div>
 </div>
