@@ -2,13 +2,13 @@
 <div class="dialog-content" *ngIf="displayModalBG"></div>
 <div class="corner_top"></div>
 <div class="container-fluid h100 p-3">
-  <div class="row bar">
+  <div class="row- bar">
     <div class="d-flex justify-content-between">
       <!-- <a (click)="back()">{{btn}}</a> -->
       <a  routerLink="/dashboard">{{btn}}</a>
       <a  routerLink="/">{{out}}</a>
-
     </div>
+    <div class="clearfix"></div>
   </div>
   <div class="rounded-3 content">
     <router-outlet></router-outlet>

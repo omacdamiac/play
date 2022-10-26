@@ -1,40 +1,46 @@
-@import './scss/fonts';
-@import './scss/variables';
-body{
+@import "./scss/fonts";
+@import "./scss/variables";
+@import '~font-awesome/css/font-awesome.css';
+@import '~angular-sidebar-menu/themes/admin-lte.scss';
+body {
     font-size: $font-size;
-    font-family: 'Milky Coffee';
+    font-family: "Milky Coffee";
     color: $orange;
     background-image: radial-gradient(circle, #6101a1, #56018f, #4b017d, #40016b, #36015a);
 }
-.corner{
+.corner {
     background: url(./assets/corner.png);
     width: 274px;
     height: 356px;
     position: absolute;
     z-index: -1;
-    &_top{
+    &_top {
         @extend .corner;
         right: 0;
         top: 0;
     }
-    &_bottom{
+    &_bottom {
         @extend .corner;
         left: 0;
-        bottom: 0;    
+        bottom: 0;
         transform: rotate(180deg);
     }
 }
-a{
+a {
     color: #ff01c2;
     text-decoration: none;
-    display: contents;
-    .bar &{
+    // display: contents;
+    .bar & {
+        color: white;
+        &:hover {
+            text-decoration: underline;
+        }
         @media (max-width: 768px) {
             color: white;
             display: inline-block;
         }
     }
 }
-.bor{
+.bor {
     border: 3px dashed white;
 }

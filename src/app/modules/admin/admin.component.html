@@ -1,0 +1,27 @@
+<app-loader></app-loader>
+<div class="dialog-content" *ngIf="displayModalBG"></div>
+<div class="container-fluid h100 p-3">
+  <div class="row">
+    <div class="d-flex justify-content-between">
+      <!-- <a (click)="back()">{{btn}}</a> -->
+      <a routerLink="/dashboard">{{ btn }}</a>
+      <a routerLink="/">{{ out }}</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <a routerLink="/admin">usuarios</a>
+  <a routerLink="/admin/rating">calificaciones</a>
+  <a routerLink="/admin/listas">listas</a>
+  <div class="content">
+    <div class="sidebar">
+      <asm-angular-sidebar-menu
+        [menu]="menu"
+        toggleIconClasses="fa fa-angle-left"
+        iconClasses="fa fa-circle-o"
+      ></asm-angular-sidebar-menu>
+    </div>
+    <div class="rounded-3 content-outlet border">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
