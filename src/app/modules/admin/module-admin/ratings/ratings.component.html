@@ -1,1 +1,55 @@
-<h1>CALIFICACIONES</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Reporte de calificaciones</h1>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label for="user">Usuario</label>
+<input type="text" name="user" value="Jo">
+</div>
+        <div class="col-6">
+            <label>Usuario:</label>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label for="profile">Alumno</label>
+            <select name="profile" id="">
+                <option value="">Juan</option>
+                <option value="">Jose</option>
+                <option value="">Carlos</option>
+            </select>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <ng-container *ngFor="let item of list">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td rowspan="2"> FRUTAS </td>
+                            <td>O</td>
+                            <td>O</td>
+                            <td>O</td>
+                            <td>O</td>
+                            <td>O</td>
+                        </tr>
+                        <tr>
+                            <td>Bien</td>
+                            <td>Bien</td>
+                            <td>Bien</td>
+                            <td>Bien</td>
+                            <td>Bien</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+        </div>
+    </div>
+</div>

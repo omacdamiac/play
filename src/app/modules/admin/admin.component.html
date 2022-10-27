@@ -1,6 +1,6 @@
 <app-loader></app-loader>
 <div class="dialog-content" *ngIf="displayModalBG"></div>
-<div class="container-fluid h100 p-3">
+<div class="container-fluid h100 p-3 admin">
   <div class="row">
     <div class="d-flex justify-content-between">
       <!-- <a (click)="back()">{{btn}}</a> -->
@@ -9,9 +9,12 @@
     </div>
     <div class="clearfix"></div>
   </div>
-  <a routerLink="/admin">usuarios</a>
-  <a routerLink="/admin/rating">calificaciones</a>
-  <a routerLink="/admin/listas">listas</a>
+  <a routerLink="/admin">usuarios</a> -
+  <a routerLink="/admin/rating">calificaciones</a> -
+  <a routerLink="/admin/listas">lista categorías</a> - -----
+  <a routerLink="/admin/mantenimiento/usuario">usuarios</a> -
+  <a routerLink="/admin/mantenimiento/categoria">categorias</a> - 
+  <a routerLink="/admin/mantenimiento/opciones">Opciones</a>
   <div class="content">
     <div class="sidebar">
       <asm-angular-sidebar-menu
