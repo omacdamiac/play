@@ -97,7 +97,7 @@ export class OptionsComponent implements OnInit {
 
   }
 
-  validateOption(data: IOptionsData) {
+  validateOption(data: IOptionsData) {    
     switch (Number(data.id)) {
       case 2:
         this.learningService.setState({ item2: data });

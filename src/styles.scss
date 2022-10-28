@@ -1,12 +1,14 @@
 @import "./scss/fonts";
 @import "./scss/variables";
-@import '~font-awesome/css/font-awesome.css';
-@import '~angular-sidebar-menu/themes/admin-lte.scss';
+// @import "~font-awesome/css/font-awesome.css";
+// @import "~angular-sidebar-menu/themes/admin-lte.scss";
+html, body { height: 100%; }
 body {
     font-size: $font-size;
     font-family: "Milky Coffee";
     color: $orange;
     background-image: radial-gradient(circle, #6101a1, #56018f, #4b017d, #40016b, #36015a);
+    margin: 0
 }
 .corner {
     background: url(./assets/corner.png);
@@ -45,18 +47,22 @@ a {
     border: 3px dashed white;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 table {
     width: 100%;
-  }
-  
-  .mat-form-field {
+}
+
+.mat-form-field {
     font-size: 14px;
     width: 100%;
-  }
-  
-  td, th {
+}
+
+td,
+th {
     width: 25%;
-  }
+}
+.link {
+    cursor: pointer;
+    &:hover {
+        color: $magenta;
+    }
+}

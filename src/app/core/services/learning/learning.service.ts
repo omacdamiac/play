@@ -43,8 +43,9 @@ export class LearningService {
     item3: undefined,
     item4: undefined,
     item5: undefined,
-  };
+};
 
+  // private options = new BehaviorSubject();
   private options = new BehaviorSubject({});
   options$ = this.options.asObservable();
   constructor(private http: HttpClient) {}

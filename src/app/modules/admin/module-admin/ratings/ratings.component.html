@@ -1,55 +1,112 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1>Reporte de calificaciones</h1>
-        </div>
-        <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-12">
+      <h1>Reporte de calificaciones</h1>
     </div>
-    <div class="row">
-        <div class="col-6">
-            <label for="user">Usuario</label>
-<input type="text" name="user" value="Jo">
-</div>
-        <div class="col-6">
-            <label>Usuario:</label>
-        </div>
-        <div class="clearfix"></div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-6">
+      <label for="user">Usuario</label>
+      <input type="text" name="user" value="Jo" />
     </div>
-    <div class="row">
-        <div class="col-6">
-            <label for="profile">Alumno</label>
-            <select name="profile" id="">
-                <option value="">Juan</option>
-                <option value="">Jose</option>
-                <option value="">Carlos</option>
-            </select>
-        </div>
-        <div class="clearfix"></div>
+    <div class="col-6">
+      <label>Usuario:</label>
     </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <label for="profile">Alumno</label>
+      <select name="profile" id="">
+        <option value="">Juan</option>
+        <option value="">Jose</option>
+        <option value="">Carlos</option>
+      </select>
+    </div>
+    <div class="clearfix"></div>
+  </div> -->
 
-    <div class="row">
-        <div class="col-12">
-            <ng-container *ngFor="let item of list">
-                <table class="table table-bordered">
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtro de búsqueda</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Henry"
+          #input
+        />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+            <td mat-cell *matCellDef="let row">{{ row.user }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoría</th>
+            <td mat-cell *matCellDef="let row">{{ row.category }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="respuestas">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Respuestas</th>
+            <td mat-cell *matCellDef="let row">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th><img width="30" src="../assets/categorias/{{row.answer['item'].img }}.png" alt="{{row.answer['item'].name }}"> </th>
+                            <th><img width="30" src="../assets/categorias/{{row.answer['item2'].img }}.png" alt="{{row.answer['item2'].name }}"> </th>
+                            <th><img width="30" src="../assets/categorias/{{row.answer['item3'].img }}.png" alt="{{row.answer['item3'].name }}"> </th>
+                            <th><img width="30" src="../assets/categorias/{{row.answer['item4'].img }}.png" alt="{{row.answer['item4'].name }}"> </th>
+                            <th><img width="30" src="../assets/categorias/{{row.answer['item5'].img }}.png" alt="{{row.answer['item5'].name }}"> </th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
-                            <td rowspan="2"> FRUTAS </td>
-                            <td>O</td>
-                            <td>O</td>
-                            <td>O</td>
-                            <td>O</td>
-                            <td>O</td>
-                        </tr>
-                        <tr>
-                            <td>Bien</td>
-                            <td>Bien</td>
-                            <td>Bien</td>
-                            <td>Bien</td>
-                            <td>Bien</td>
+                            <td><img width="30" src="../assets/{{ row.answer['item'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="../assets/{{ row.answer['item2'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item2'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item2'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="../assets/{{ row.answer['item3'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item3'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item3'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="../assets/{{ row.answer['item4'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item4'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item4'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="../assets/{{ row.answer['item5'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item5'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item5'].answer ? 'bien' : 'mal' }}"></td>
+                            <!-- <td>{{row.answer['item5'].answer }}</td> -->
                         </tr>
                     </tbody>
                 </table>
-            </ng-container>
-        </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="opciones">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Opciones</th>
+            <td mat-cell *matCellDef="let row">
+                <!-- <em (click)="updateUser()" class="fa fa-edit h6 link"></em> -->
+                <em (click)="deleteRating()" class="fa fa-trash h5 ms-3 link"></em>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No data matching the filter "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page of users"
+        ></mat-paginator>
+      </div>
     </div>
+  </div>
 </div>
