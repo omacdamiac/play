@@ -13,15 +13,15 @@ export class SelectComponent implements OnInit {
   @Input() name!: string;
   @Input() formControlName!: string;
   @Input() required!: boolean;
-  @Input() disabled!: boolean;
-  @Input() options!: Array<any>;
+  @Input() options!: Array<string>;
 
-  constructor() {  }
+  constructor() {}
 
   ngOnInit(): void {
     this.formParent.addControl(
       this.name,
       new FormControl(
+        this.value === '' ? '' : this.value,
         this.required ? Validators.required : null
       )
     );

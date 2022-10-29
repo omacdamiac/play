@@ -16,11 +16,10 @@
     [formControlName]="name"
     [id]="name"
     [required]="required"
-    [attr.disabled]="disabled"
   >
     <option selected disabled>Seleccionar</option>
-    <option *ngFor="let option of options" [value]="option.value">
-      {{ option.text }}
+    <option *ngFor="let option of options" [value]="option">
+      {{ option }}
     </option>
   </select>
 

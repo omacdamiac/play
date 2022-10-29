@@ -8,10 +8,12 @@ import { SidebarMenuModule } from 'angular-sidebar-menu';
 import { UserComponent } from './module-admin/user/user.component';
 import { CategoryListComponent } from './module-admin/category-list/category-list.component';
 import { RatingsComponent } from './module-admin/ratings/ratings.component';
-import { ButtonModule } from 'src/app/commons/components/button/button.module';
 import { MaterialModule } from 'src/app/core/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { InputModule, SelectModule, ButtonModule } from 'src/app/commons/components';
+import { UpdateUserComponent } from './module-admin/update-user/update-user.component';
+import { NotImageDirective } from 'src/app/core/directive/not-image.directive';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     UserComponent,
     CategoryListComponent,
     RatingsComponent,
+    UpdateUserComponent,
+    NotImageDirective,
   ],
   imports: [
     CommonModule,
@@ -31,6 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MaterialModule,
     ButtonModule,
+    InputModule,
+    SelectModule,
   ],
 })
 export class AdminModule { }

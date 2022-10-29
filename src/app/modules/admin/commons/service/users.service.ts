@@ -18,4 +18,16 @@ export class UsersService {
   getUsers(): Observable<IUser[]> {
     return this.http.get<IUser[]>(this.apiUrl + ENDPOINT.GET_USERS);
   }
+
+  newUser(user: IUser): Observable<IUser> {
+    return this.http.post<IUser>(this.apiUrl + ENDPOINT.GET_USERS, user);
+  }
+
+  updateUser(user: IUser): Observable<IUser> {
+    return this.http.put<IUser>(this.apiUrl + ENDPOINT.GET_USERS, user);
+  }
+
+  deleteUser(userId: number): Observable<IUser> {
+    return this.http.delete<IUser>(this.apiUrl + ENDPOINT.GET_USERS + '/' + userId);
+  }
 }

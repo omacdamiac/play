@@ -1,46 +1,97 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1>Mantenimiento de usuarios</h1>
-        </div>
+<div class="container" [formGroup]="formUser">
+  <div class="row">
+    <div class="col-12">
+      <h2>Mantenimiento de usuarios</h2>
     </div>
-    <div class="row">
-        <div class="col-4">
-            <label for="">Perfil</label>
-           <select name="" id="">
-               <option value="">Administrador</option>
-           </select>
-        </div>
-        <div class="col-4">
-            <label for="">Nombre</label>
-            <input type="text">
-        </div>
-        <div class="col-4">
-            <label for="">Apellido</label>
-            <input type="text">
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+        <app-select
+        [formParent]="formUser"
+        [label]="selectRol.label"
+        [name]="selectRol.name"
+        [required]="selectRol.required"
+        [options]="selectRol.options"
+      ></app-select>
     </div>
-    <div class="row">
-        <div class="col-4">
-            <label for="">Foto</label>
-           <select name="" id="">
-               <option value="">Administrador</option>
-           </select>
-        </div>
-        <div class="col-4">
-            <label for="">Usuario</label>
-            <input type="text">
-        </div>
-        <div class="col-4">
-            <label for="">Clave</label>
-            <input type="text">
-        </div>
+    <div class="col-4">
+      <app-input
+      [formParent]="formUser"
+      [label]="InpName.text"
+      [placeholder]="InpName.place"
+      [required]="InpName.required"
+      [name]="InpName.name"
+      [type]="InpName.type"
+    ></app-input>
     </div>
+    <div class="col-4">
+        <app-input
+        [formParent]="formUser"
+        [label]="InpLastName.text"
+        [placeholder]="InpLastName.place"
+        [required]="InpLastName.required"
+        [name]="InpLastName.name"
+        [type]="InpLastName.type"
+      ></app-input>    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <label for="">Foto</label>
+      <input type="file" accept=".jpg,.png" class="button" (change)="uploadImage($event)" />
+      </div>
+    <div class="col-4">
+        <app-input
+        [formParent]="formUser"
+        [label]="InpUserName.text"
+        [placeholder]="InpUserName.place"
+        [required]="InpUserName.required"
+        [name]="InpUserName.name"
+        [type]="InpUserName.type"
+      ></app-input>    </div>
+    <div class="col-4">
+        <app-input
+        [formParent]="formUser"
+        [label]="InpPass.text"
+        [placeholder]="InpPass.place"
+        [required]="InpPass.required"
+        [name]="InpPass.name"
+        [type]="InpPass.type"
+      ></app-input>
+    </div>
+    <div class="col-4">
+        <mat-slide-toggle
+        formControlName="state"
+        class="example-margin"
+        checked="true">
+      Estado
+    </mat-slide-toggle>
+    </div>
+  </div>
 
-    <div class="row">
-        <div class="col-6">
-            <button>Guardar</button>
-            <button>CAncelar</button>
-        </div>
+  <div class="row">
+    <div class="col-6">
+        <ng-container *ngIf="data === undefined;else Edit">
+            <app-button
+            [texto]="btnSave.texto"
+            [color]="btnSave.color"
+            [type]="btnSave.type"
+            (evento)="saveUser()"
+
+            ></app-button>
+        </ng-container>
+        <ng-template #Edit>
+            <app-button
+            [texto]="btnEdit.texto"
+            [color]="btnEdit.color"
+            [mat-dialog-close]="data"
+          ></app-button>
+        </ng-template>
+      <app-button
+        [texto]="btnCancel.texto"
+        [color]="btnCancel.color"
+        [type]="btnCancel.type"
+        (evento)="cancel()"
+      ></app-button>
     </div>
+  </div>
 </div>

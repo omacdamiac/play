@@ -16,11 +16,11 @@ import { UpdateUserComponent } from '../update-user/update-user.component';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nombre', 'perfil', 'estado', 'opciones'];
+  displayedColumns: string[] = ['id', 'name', 'username', 'rol', 'avatar', 'state', 'actions'];
   dataSource!: MatTableDataSource<IUser>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  listProfile: IProfileCMB[];
+  listProfile!: IProfileCMB[];
 
   btnAdd = new ButtonNsModel.ButtonClass(
     'Agregar', 'primary', 'borde'
@@ -29,7 +29,7 @@ export class UserComponent implements OnInit {
     private usersService: UsersService,
     public dialog: MatDialog,
     ) {
-    this.listProfile = LIST_PROFILE;
+    // this.listProfile = LIST_PROFILE;
   }
 
   ngOnInit(): void {
@@ -50,17 +50,33 @@ export class UserComponent implements OnInit {
     });
   }
 
-  updateUser(): void {
-    this.dialog.open(UpdateUserComponent, {
-      data: {
-        animal: 'panda'
-      }
+  viewModal(user?: IUser): void {
+    const dialogRef = this.dialog.open(UpdateUserComponent, {
+      data: user
     });
 
+    dialogRef.afterClosed().subscribe(userData => {
+      if(userData !== undefined) {
+        if(userData.id) {
+          this.update(userData);
+        } else {
+          this.save(userData);
+        }
+
+      }
+    });
   }
 
-  deleteUser(): void {
+  private save(userData: IUser) {
+    this.usersService.newUser(userData).subscribe(_=> this.listUser())
+  }
 
+  private update(userData: IUser) {
+    this.usersService.updateUser(userData).subscribe(_=> this.listUser())
+  }
+
+  deleteUser(id: number): void {
+    this.usersService.deleteUser(id).subscribe(_=> this.listUser())
   }
 
   applyFilter(event: Event): void {

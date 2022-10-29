@@ -8,8 +8,13 @@ export const TITLE_CATEGORY = 'Debes elegir una categoria';
 
 //ADMIN
 
-export const LIST_PROFILE = [
-  { id: 1, profile: 'administrador' },
-  { id: 2, profile: 'docente' },
-  { id: 3, profile: 'alumno' },
+export const LIST_PROFILE = ['administrador',
+'docente',
+ 'alumno'
 ];
+
+// export const LIST_PROFILE = [
+//   { id: 1, profile: 'administrador' },
+//   { id: 2, profile: 'docente' },
+//   { id: 3, profile: 'alumno' },
+// ];

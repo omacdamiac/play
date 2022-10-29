@@ -1,8 +1,11 @@
 export interface IUser {
   id: number;
-  nombre: string;
-  perfil: string;
-  estado: number;
+  name: string;
+  lastname: string;
+  rol: string;
+  avatar: string;
+  user: number;
+  state: number;
 }
 
 export interface IProfileCMB {

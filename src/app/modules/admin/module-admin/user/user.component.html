@@ -8,7 +8,7 @@
         [texto]="btnAdd.texto"
         [color]="btnAdd.color"
         [type]="btnAdd.type"
-        (evento)="updateUser()"
+        (evento)="viewModal()"
       ></app-button>
       <!-- <button>Agregar <i class="fa fa-plus"></i></button> -->
     </div>
@@ -41,34 +41,43 @@
 
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
-          <!-- ID Column -->
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
             <td mat-cell *matCellDef="let row">{{ row.id }}</td>
           </ng-container>
 
-          <!-- Progress Column -->
-          <ng-container matColumnDef="nombre">
+          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-            <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.name + ' ' + row.lastName}}</td>
           </ng-container>
 
-          <ng-container matColumnDef="perfil">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Perfil</th>
-            <td mat-cell *matCellDef="let row">{{ row.perfil }}</td>
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+            <td mat-cell *matCellDef="let row">{{ row.user}}</td>
           </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="estado">
+          <ng-container matColumnDef="rol">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
+            <td mat-cell *matCellDef="let row">{{ row.rol }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="avatar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Foto</th>
+            <td mat-cell *matCellDef="let row">
+              <img width="30" appNotImage src="./assets/user/{{ row?.avatar }}.jpg" alt="{{ row?.avatar }">
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-            <td mat-cell *matCellDef="let row">{{ row.estado }}</td>
+            <td mat-cell *matCellDef="let row"><span [class]="row.state ? 'activo' : 'inactivo'">{{row.state ? 'activo' : 'inactivo'}}</span></td>
           </ng-container>
 
-          <ng-container matColumnDef="opciones">
+          <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Opciones</th>
             <td mat-cell *matCellDef="let row">
-                <em (click)="updateUser()" class="fa fa-edit h6 link"></em>
-                <em (click)="deleteUser()" class="fa fa-trash h6 ms-3 link"></em>
+                <em (click)="viewModal(row)" class="fa fa-edit h6 link"></em>
+                <em (click)="deleteUser(row.id)" class="fa fa-trash h6 ms-3 link"></em>
             </td>
           </ng-container>
 
@@ -77,7 +86,7 @@
 
           <!-- Row shown when there is no matching data. -->
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">
+            <td class="mat-cell" colspan="6">
               No data matching the filter "{{ input.value }}"
             </td>
           </tr>

@@ -58,11 +58,35 @@ table {
 
 td,
 th {
-    width: 25%;
+    display: table-cell;
+    //width: 25%;
 }
 .link {
     cursor: pointer;
     &:hover {
         color: $magenta;
     }
+}
+
+.activo{
+    background: green;
+    color: white;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.inactivo{
+    background: red;
+    color: white;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+
+.mat-dialog-container{
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    font-size: 12px;
+
 }

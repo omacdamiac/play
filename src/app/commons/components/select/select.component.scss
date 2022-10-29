@@ -1,7 +1,7 @@
 @import '../../../../scss/variables';
 label,
 select{
-    font-size: $font-form;
+    // font-size: $font-form;
 }
 label>span{
     display: none;
@@ -10,6 +10,6 @@ label>span{
     }
 }
 .isvalid{
-    color: $text-red;
-    font-size: $font-valid;
+    color: $red;
+    font-size: 10px;
 }
