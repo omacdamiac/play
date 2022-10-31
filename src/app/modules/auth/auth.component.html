@@ -2,15 +2,34 @@
 <div class="container-fluid bg-info- h100 p-3">
     <div class="row m-0 rounded-3 bor- h-100">
         <div class="h-50"></div>
-        <div class="col-4 offset-6 h-50">
+        <div class="col-6 offset-6 h-50">
             <h1 class="bienvenido">BIENVENIDOS</h1>
             <div class="input-group input-group-lg">
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="CORREO ELECTRÓNICO">
+                <app-input
+                [formParent]="form"
+                [label]="InpUser.text"
+                [placeholder]="InpUser.place"
+                [required]="InpUser.required"
+                [name]="InpUser.name"
+                [type]="InpUser.type"
+              ></app-input>
             </div>
             <div class="input-group input-group-lg my-2">
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="CLAVE">
+                <app-input
+                [formParent]="form"
+                [label]="InpPass.text"
+                [placeholder]="InpPass.place"
+                [required]="InpPass.required"
+                [name]="InpPass.name"
+                [type]="InpPass.type"
+              ></app-input>
             </div>
-            <button type="button" class="btn btn-lg btn-danger position-relative" (click)="auth()">INGRESAR</button>
+            <app-button
+                [texto]="btnIntro.texto"
+                [color]="btnIntro.color"
+                [type]="btnIntro.type"
+                (evento)="auth()"
+                ></app-button>
         </div>
     </div>
 </div>

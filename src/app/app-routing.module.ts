@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { AdminGuard } from './core/guards/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -7,10 +8,10 @@ const routes: Routes = [
     path: 'login', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
+    path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AdminGuard]
   },
   {
-    path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+    path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule), canActivate: [AdminGuard]
   }
 ];
 

@@ -1,11 +1,12 @@
 export interface IUser {
   id: number;
   name: string;
-  lastname: string;
+  lastName: string;
   rol: string;
-  avatar: string;
-  user: number;
-  state: number;
+  avatar?: string | undefined;
+  user: string;
+  pass: string;
+  state: boolean;
 }
 
 export interface IProfileCMB {

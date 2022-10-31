@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BTN_NEXT, BTN_NOT, BTN_YES, LINK_GO_MAIN } from 'src/app/core/constants/text.const';
 import {
-  ICategory,
-  IOptions,
-  IOptionsData,
-} from 'src/app/core/models/options.model';
+  BTN_NEXT,
+  BTN_NOT,
+  BTN_YES,
+  LINK_GO_MAIN,
+} from 'src/app/core/constants/text.const';
+import { ICategory, IOptions } from 'src/app/core/models';
+import { IOptionsData } from 'src/app/core/models/options.model';
 import { LearningService } from 'src/app/core/services/learning/learning.service';
 
 @Component({
@@ -38,10 +40,6 @@ export class OptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCategory();
-  }
-
-  getCategory() {
     this.learningService.getOption(this.id).subscribe({
       next: (response: ICategory) => {
         this.categoriaCurrent = response.options;
@@ -57,7 +55,7 @@ export class OptionsComponent implements OnInit {
     return this.categoriaCurrent[r];
   }
 
-  validate(item: IOptions, value: boolean | null): void {
+  validate(item: ICategory, value: boolean | null): void {
     console.log(this.categoriaCurrent);
     this.categoriaCurrent.filter((element: IOptions) => {
       if (element.id === item.id) {
@@ -78,7 +76,7 @@ export class OptionsComponent implements OnInit {
       if (value === null) {
         this.display = false;
         this.nextTo();
-      } else if(value) {
+      } else if (value) {
         this.learningService.setStateDisplay(true);
         this.display = true;
         this.respuesta = true;
@@ -94,10 +92,9 @@ export class OptionsComponent implements OnInit {
     this.currentItem = this.updateRandomImage(0);
     this.display = false;
     this.learningService.setStateDisplay(false);
-
   }
 
-  validateOption(data: IOptionsData) {    
+  validateOption(data: any) {
     switch (Number(data.id)) {
       case 2:
         this.learningService.setState({ item2: data });

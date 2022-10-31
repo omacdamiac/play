@@ -1,26 +1,58 @@
-<div class="container">
+<div class="container" [formGroup]="formCategory">
     <div class="row">
         <div class="col-12">
             <h1>Mantenimiento de Categorías</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-4">
-            <label for="">Nombre</label>
-            <input type="text">
-
+    <div class="row align-items-center">
+        <div class="col-5">
+            <app-input
+            [formParent]="formCategory"
+            [label]="InpName.text"
+            [placeholder]="InpName.place"
+            [required]="InpName.required"
+            [name]="InpName.name"
+            [type]="InpName.type"
+          ></app-input>
         </div>
-        <div class="col-4">
+        <!-- <div class="col-4">
             <label for="">Alias</label>
             <input type="text">
+        </div> -->
+        <div class="col-4">
+            <mat-slide-toggle
+            formControlName="state"
+            class="example-margin"
+            checked="true">
+          Estado
+        </mat-slide-toggle>
         </div>
 
     </div>
 
     <div class="row">
         <div class="col-6">
-            <button>Guardar</button>
-            <button>CAncelar</button>
+            <ng-container *ngIf="data === undefined;else Edit">
+                <app-button
+                [texto]="btnSave.texto"
+                [color]="btnSave.color"
+                [type]="btnSave.type"
+                (evento)="saveCategory()"
+                ></app-button>
+            </ng-container>
+            <ng-template #Edit>
+                <app-button
+                [texto]="btnEdit.texto"
+                [color]="btnEdit.color"
+                [mat-dialog-close]="form"
+              ></app-button>
+            </ng-template>
+            <app-button
+            [texto]="btnCancel.texto"
+            [color]="btnCancel.color"
+            [type]="btnCancel.type"
+            (evento)="cancel()"
+          ></app-button>
         </div>
     </div>
 </div>

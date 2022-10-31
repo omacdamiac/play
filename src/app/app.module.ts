@@ -7,10 +7,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Interceptor } from './core/interceptors/interceptor.interceptor';
+import { AdminGuard } from './core/guards/admin.guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,6 +20,7 @@ import { Interceptor } from './core/interceptors/interceptor.interceptor';
     HttpClientModule,
   ],
   providers: [
+    AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,

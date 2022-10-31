@@ -14,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputModule, SelectModule, ButtonModule } from 'src/app/commons/components';
 import { UpdateUserComponent } from './module-admin/update-user/update-user.component';
 import { NotImageDirective } from 'src/app/core/directive/not-image.directive';
+import { UpdateCategoryComponent } from './module-admin/update-category/update-category.component';
+import { UpdateOptionComponent } from './module-admin/update-option/update-option.component';
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 
 @NgModule({
@@ -23,6 +26,8 @@ import { NotImageDirective } from 'src/app/core/directive/not-image.directive';
     CategoryListComponent,
     RatingsComponent,
     UpdateUserComponent,
+    UpdateCategoryComponent,
+    UpdateOptionComponent,
     NotImageDirective,
   ],
   imports: [
@@ -38,5 +43,8 @@ import { NotImageDirective } from 'src/app/core/directive/not-image.directive';
     InputModule,
     SelectModule,
   ],
+  providers: [
+    AdminGuard
+  ]
 })
 export class AdminModule { }

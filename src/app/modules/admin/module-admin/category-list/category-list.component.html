@@ -1,86 +1,104 @@
 <div class="container">
-    <div class="row">
-        <div class="col-8">
-            <h1>Mantenimiento de Categorías</h1>
-        </div>
-        <div class="col-4">
-          <app-button
-          [texto]="btnAdd.texto"
-          [color]="btnAdd.color"
-          [type]="btnAdd.type"
-          (evento)="updateCategories()"
-        ></app-button>      </div>
-        <div class="clearfix"></div>
+  <div class="row align-items-end">
+    <div class="col-8">
+      <h1>Mantenimiento de Categorías</h1>
     </div>
-    <!-- <div class="row">
-        <div class="col-6">
-            <label for="category">Categoría</label>
-            <select name="category" id="">
-                <option value="">Frutas</option>
-                <option value="">Animales</option>
-                <option value="">Números</option>
-            </select>
-        </div>
-        <div class="col-6">
-            <label>Usuario:</label>
-        </div>
-        <div class="clearfix"></div>
+    <div class="col-2">
+      <app-button [texto]="btnAddCategory.texto" [color]="btnAddCategory.color" [type]="btnAddCategory.type" (evento)="viewModal()">
+      </app-button>
     </div>
-    <div class="row">
-        <div class="col-6">
-            <label for="stage">Nivel</label>
-            <select name="stage" id="">
-                <option value="">1</option>
-                <option value="">2</option>
-            </select>
-        </div>
-        <div class="clearfix"></div>
-    </div> -->
-    <div class="row">
-        <div class="col-12">
-            <mat-form-field appearance="standard">
-                <mat-label>Filtro</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Buscar categorías" #input>
-              </mat-form-field>
-              
-              <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort>
-              
-                  <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-                  </ng-container>
-              
-                  <ng-container matColumnDef="nombre">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}}</td>
-                  </ng-container>
-              
-                  <ng-container matColumnDef="estado">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-                    <td mat-cell *matCellDef="let row"> <span [class]="row.state ? 'activo' : 'inactivo'">{{row.state ? 'activo' : 'inactivo'}}</span></td>
-                  </ng-container>
-              
-                  <ng-container matColumnDef="opciones">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
-                    <td mat-cell *matCellDef="let row">
-                      <em (click)="updateCategories()" class="fa fa-edit h6 link"></em>
-                      <em (click)="deleteCategories()" class="fa fa-trash h6 ms-3 link"></em>
-      
-                    </td>
-                  </ng-container>
-              
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              
-                  <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                  </tr>
-                </table>
-              
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of category"></mat-paginator>
+    <div class="col-2">
+      <app-button [texto]="btnAddOption.texto" [color]="btnAddOption.color" [type]="btnAddOption.type" (evento)="viewModalOption()">
+      </app-button>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtro de categorías</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar categorías" #input />
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+          <ng-container matColumnDef="{{ column }}" *ngFor="let column of displayedColumns">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              {{ column }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element[column] !== true && element[column] !== false; else state">
+                {{ element[column] }}
+              </ng-container>
+              <ng-template #state>
+                <ng-container *ngIf="element[column]; else not">
+                  <span class="activo">Activo</span>
+                </ng-container>
+                <ng-template #not>
+                  <span class="inactivo">Inactivo</span>
+                </ng-template>
+              </ng-template>
+            
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+              <div class="example-element-detail" [@detailExpand]="
+                  element == expandedElement ? 'expanded' : 'collapsed'
+                ">
+                <div class="example-element-options">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of element.options">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.img }}</td>
+                        <td>
+                          <em (click)="viewModalOption(element)" class="fa fa-edit h6 link"></em>
+                          <em (click)="deleteCategory(item.id)" class="fa fa-trash h6 ms-3 link"></em>            
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            
+                </div>
               </div>
-              
-        </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+            <td mat-cell *matCellDef="let row">
+              <em (click)="viewModal(row)" class="fa fa-edit h6 link"></em>
+              <em (click)="deleteCategory(row.id)" class="fa fa-trash h6 ms-3 link"></em>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element" (click)="
+              expandedElement = expandedElement === element ? null : element
+            "></tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No data matching the filter "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of category"></mat-paginator>
+      </div>
     </div>
+    <div class="clearfix"></div>
+  </div>
 </div>

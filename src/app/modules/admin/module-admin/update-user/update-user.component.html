@@ -1,4 +1,5 @@
 <div class="container" [formGroup]="formUser">
+    <!-- <input type="text" formControlName="id" [value]="data.id"> -->
   <div class="row">
     <div class="col-12">
       <h2>Mantenimiento de usuarios</h2>
@@ -15,6 +16,11 @@
       ></app-select>
     </div>
     <div class="col-4">
+        <!-- <app-input
+        [formParent]="formUser"
+        [name]="InpName.name"
+        [type]="InpName.type"
+      ></app-input> -->
       <app-input
       [formParent]="formUser"
       [label]="InpName.text"
@@ -35,10 +41,10 @@
       ></app-input>    </div>
   </div>
   <div class="row">
-    <div class="col-4">
+    <!-- <div class="col-4">
       <label for="">Foto</label>
       <input type="file" accept=".jpg,.png" class="button" (change)="uploadImage($event)" />
-      </div>
+      </div> -->
     <div class="col-4">
         <app-input
         [formParent]="formUser"
@@ -83,7 +89,7 @@
             <app-button
             [texto]="btnEdit.texto"
             [color]="btnEdit.color"
-            [mat-dialog-close]="data"
+            [mat-dialog-close]="form"
           ></app-button>
         </ng-template>
       <app-button

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TITLE_CATEGORY } from 'src/app/core/constants/text.const';
-import { ICategory } from 'src/app/core/models/options.model';
 import { LearningService } from 'src/app/core/services/learning/learning.service';
 import {
   trigger,
@@ -11,6 +10,7 @@ import {
   transition,
 } from '@angular/animations';
 import { switchMap } from 'rxjs/operators';
+import { ICategory } from 'src/app/core/models';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -49,12 +49,9 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.learningService.getOptions().subscribe({
+    this.learningService.getListCategory().subscribe({
       next: (response: ICategory[]) => {
         this.learningService.setStateDisplay(false);
-
-        console.log(response)
         this.options = response;
       }
     })

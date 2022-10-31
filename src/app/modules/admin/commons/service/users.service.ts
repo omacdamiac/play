@@ -24,10 +24,15 @@ export class UsersService {
   }
 
   updateUser(user: IUser): Observable<IUser> {
-    return this.http.put<IUser>(this.apiUrl + ENDPOINT.GET_USERS, user);
+    return this.http.put<IUser>(
+      this.apiUrl + ENDPOINT.GET_USERS + '/' + user.id,
+      user
+    );
   }
 
   deleteUser(userId: number): Observable<IUser> {
-    return this.http.delete<IUser>(this.apiUrl + ENDPOINT.GET_USERS + '/' + userId);
+    return this.http.delete<IUser>(
+      this.apiUrl + ENDPOINT.GET_USERS + '/' + userId,
+    );
   }
 }

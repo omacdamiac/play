@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [formGroup]="formOption">
   <div class="row">
     <div class="col-12">
       <h1>Mantenimiento de Opciones</h1>
@@ -6,39 +6,70 @@
   </div>
   <div class="row">
     <div class="col-4">
-      <label for="">Categoría</label>
-      <select name="" id="">
-        <option value="">Administrador</option>
-      </select>
+      <app-select
+      [formParent]="formOption"
+      [label]="selectCategory.label"
+      [name]="selectCategory.name"
+      [required]="selectCategory.required"
+      [options]="selectCategory.options"
+    ></app-select>
     </div>
     <div class="col-4">
-      <label for="">Nivel</label>
-      <select name="" id="">
-        <option value="">1</option>
-        <option value="">2</option>
-      </select>
+      <app-select
+      [formParent]="formOption"
+      [label]="selectLevel.label"
+      [name]="selectLevel.name"
+      [required]="selectLevel.required"
+      [options]="selectLevel.options"
+    ></app-select>
     </div>
 
   </div>
   <div class="row">
-    <div class="col-4">
-      <label for="">Nombre</label>
-      <input type="text" />
+    <div class="col-5">
+      <app-input
+      [formParent]="formOption"
+      [label]="inpName.text"
+      [placeholder]="inpName.place"
+      [required]="inpName.required"
+      [name]="inpName.name"
+      [type]="inpName.type"
+    ></app-input>
     </div>
-    <div class="col-4">
-      <label for="">Imagen</label>
-      <input type="text" />
-    </div>
-    <div class="col-4">
-      <label for="">Estado</label>
-      <input type="text" />
-    </div>
+    <div class="col-5">
+      <app-input
+      [formParent]="formOption"
+      [label]="inpImg.text"
+      [placeholder]="inpImg.place"
+      [required]="inpImg.required"
+      [name]="inpImg.name"
+      [type]="inpImg.type"
+    ></app-input>    </div>
+
   </div>
 
   <div class="row">
     <div class="col-6">
-      <button>Guardar</button>
-      <button>CAncelar</button>
-    </div>
+      <ng-container *ngIf="data === undefined;else Edit">
+        <app-button
+        [texto]="btnSave.texto"
+        [color]="btnSave.color"
+        [type]="btnSave.type"
+        (evento)="saveOption()"
+        ></app-button>
+    </ng-container>
+    <ng-template #Edit>
+        <app-button
+        [texto]="btnEdit.texto"
+        [color]="btnEdit.color"
+        [mat-dialog-close]="form"
+      ></app-button>
+    </ng-template>
+    <app-button
+    [texto]="btnCancel.texto"
+    [color]="btnCancel.color"
+    [type]="btnCancel.type"
+    (evento)="cancel()"
+  ></app-button>    </div>
   </div>
 </div>

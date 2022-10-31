@@ -5,8 +5,14 @@
   <div class="row- bar">
     <div class="d-flex justify-content-between">
       <!-- <a (click)="back()">{{btn}}</a> -->
-      <a  routerLink="/dashboard">{{btn}}</a>
-      <a  routerLink="/">{{out}}</a>
+      <a routerLink="/">{{out}}</a>
+      <div class="d-flex">
+        <ul>
+          <li>{{ user }}</li>
+          <li>{{ rol }}</li>
+        </ul>
+        <a class="ms-3" routerLink="/admin">{{admin}}</a>
+      </div>
     </div>
     <div class="clearfix"></div>
   </div>
