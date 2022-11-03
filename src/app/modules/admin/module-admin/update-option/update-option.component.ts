@@ -12,7 +12,7 @@ import { CategoryService } from '../../commons/service/category.service';
 @Component({
   selector: 'app-update-option',
   templateUrl: './update-option.component.html',
-  styleUrls: ['./update-option.component.scss']
+  styleUrls: ['./update-option.component.scss'],
 })
 export class UpdateOptionComponent implements OnInit {
   formOption: FormGroup;
@@ -27,7 +27,7 @@ export class UpdateOptionComponent implements OnInit {
     'level',
     true,
     '',
-    [1,2]
+    [1, 2]
   );
   inpName = new InputNsModel.InputClass(
     'Nombre de opción',
@@ -56,46 +56,38 @@ export class UpdateOptionComponent implements OnInit {
     private categoryService: CategoryService,
     public dialogRef: MatDialogRef<UpdateOptionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-
   ) {
     this.formOption = new FormGroup({
+      state: new FormControl(false),
     });
-
   }
 
   ngOnInit(): void {
     console.log(this.data);
-    this.listCategory()
+    
+    this.selectCategory.options = this.data.category.map((cat: any) => {
+      return cat.name;
+    });
+    if (this.data) {
+      setTimeout(() => {
+        this.setForm();
+      });
+    }
   }
 
-  listCategory(): void {
-      this.categoryService
-        .getCategories()
-        .pipe(take(1))
-        .subscribe({
-          next: (response: ICategory[]) => {            
-            this.selectCategory.options = response.map((cat)=>cat.name)
-          },
-          error: (err) => console.error(err),
-          complete: () => {},
-        });
-    }
+  setForm() {
+    this.formOption.addControl(ID, new FormControl(this.data.option.id));
+    this.formCtrl.category.setValue(this.data.option.category);
+    this.formCtrl.name.setValue(this.data.option.name);
+    this.formCtrl.img.setValue(this.data.option.img);
+    this.formCtrl.state.setValue(this.data.option.state);
+  }
 
-    setForm() {
-      this.formOption.addControl(ID, new FormControl(this.data.id))
-      this.formOption.addControl(OPTIONS, new FormControl(this.data.options === [] ? [] : this.data.options))
-  
-      this.formCtrl.category.setValue(this.data.name);
-      this.formCtrl.name.setValue(this.data.options.name);
-      this.formCtrl.img.setValue(this.data.options.img);
-    }
+  saveOption() {
+    this.dialogRef.close(this.form);
+  }
 
-    saveOption() {      
-this.dialogRef.close(this.form);
-    }
-
-    cancel(): void {
-      this.dialogRef.close();
-    }
-
+  cancel(): void {
+    this.dialogRef.close();
+  }
 }

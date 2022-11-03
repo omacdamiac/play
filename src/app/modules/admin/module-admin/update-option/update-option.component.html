@@ -4,7 +4,7 @@
       <h1>Mantenimiento de Opciones</h1>
     </div>
   </div>
-  <div class="row">
+  <div class="row align-items-end">
     <div class="col-4">
       <app-select
       [formParent]="formOption"
@@ -14,7 +14,15 @@
       [options]="selectCategory.options"
     ></app-select>
     </div>
-    <div class="col-4">
+    <div class="col-4 text-end">
+      <mat-slide-toggle
+      formControlName="state"
+      class="example-margin"
+      checked="true">
+    Estado
+  </mat-slide-toggle>
+  </div>
+    <!-- <div class="col-4">
       <app-select
       [formParent]="formOption"
       [label]="selectLevel.label"
@@ -22,7 +30,7 @@
       [required]="selectLevel.required"
       [options]="selectLevel.options"
     ></app-select>
-    </div>
+    </div> -->
 
   </div>
   <div class="row">
@@ -50,7 +58,7 @@
 
   <div class="row">
     <div class="col-6">
-      <ng-container *ngIf="data === undefined;else Edit">
+      <ng-container *ngIf="data.option === undefined;else Edit">
         <app-button
         [texto]="btnSave.texto"
         [color]="btnSave.color"

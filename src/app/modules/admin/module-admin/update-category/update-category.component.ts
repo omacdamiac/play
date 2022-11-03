@@ -37,7 +37,7 @@ export class UpdateCategoryComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {        
+  ngOnInit(): void {
     if(this.data) {
       setTimeout(() => {
         this.setForm();

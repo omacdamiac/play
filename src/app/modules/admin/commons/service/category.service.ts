@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ENDPOINT } from 'src/app/core/constants/endpoint';
 import { ICategory, IOptions } from 'src/app/core/models';
 import { environment } from 'src/environments/environment';
@@ -37,21 +38,24 @@ export class CategoryService {
   }
 
   // OPTIOMS
-
-  newOption(id: number, cat: IOptions): Observable<IOptions> {
-    return this.http.post<IOptions>(this.apiUrl + ENDPOINT.GET_CATEGORY + '/' + id, cat);
+  getOption(): Observable<ICategory[]> {
+    return this.http.get<ICategory[]>(this.apiUrl + ENDPOINT.GET_ITEM);
   }
 
-  updateOption(cat: IOptions): Observable<IOptions> {
+  newOption(opt: ICategory): Observable<IOptions> {
+    return this.http.post<IOptions>(this.apiUrl + ENDPOINT.GET_ITEM, opt);
+  }
+
+  updateOption(opt: IOptions): Observable<IOptions> {
     return this.http.put<IOptions>(
-      this.apiUrl + ENDPOINT.GET_CATEGORY + '/' + cat.id,
-      cat
+      this.apiUrl + ENDPOINT.GET_ITEM + '/' + opt.id,
+      opt
     );
   }
 
   deleteOption(optionId: number): Observable<IOptions> {
     return this.http.delete<IOptions>(
-      this.apiUrl + ENDPOINT.GET_CATEGORY + '/' + optionId
+      this.apiUrl + ENDPOINT.GET_ITEM + '/' + optionId
     );
   }
 }

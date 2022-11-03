@@ -11,7 +11,7 @@
           <li>{{ user }}</li>
           <li>{{ rol }}</li>
         </ul>
-        <a class="ms-3" routerLink="/admin">{{admin}}</a>
+        <a *ngIf="rol === 'administrador'" class="ms-3" routerLink="/admin">{{admin}}</a>
       </div>
     </div>
     <div class="clearfix"></div>

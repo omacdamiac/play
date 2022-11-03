@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ENDPOINT } from '../../constants/endpoint';
-import { ICategory } from '../../models';
+import { ICategory, IOptions } from '../../models';
 
 export interface IStateUI {
   item:
@@ -68,8 +68,8 @@ export class LearningService {
     return this.http.get<ICategory[]>(api);
   }
 
-  getOption(item: number): Observable<ICategory> {
-    const api: string = `${environment.apiBase}${ENDPOINT.GET_CATEGORY}/${item}`;
-    return this.http.get<ICategory>(api);
+  getOption(item: number): Observable<IOptions[]> {
+    const api: string = `${environment.apiBase}${ENDPOINT.GET_ITEM}`;
+    return this.http.get<IOptions[]>(api);
   }
 }

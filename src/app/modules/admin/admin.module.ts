@@ -17,6 +17,7 @@ import { NotImageDirective } from 'src/app/core/directive/not-image.directive';
 import { UpdateCategoryComponent } from './module-admin/update-category/update-category.component';
 import { UpdateOptionComponent } from './module-admin/update-option/update-option.component';
 import { AdminGuard } from 'src/app/core/guards/admin.guard';
+import { FilterPipe } from 'src/app/core/pipes/filter.pipe';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AdminGuard } from 'src/app/core/guards/admin.guard';
     UpdateCategoryComponent,
     UpdateOptionComponent,
     NotImageDirective,
+    FilterPipe,
   ],
   imports: [
     CommonModule,

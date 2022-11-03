@@ -5,7 +5,7 @@ import { CategoryService } from '../../commons/service/category.service';
 
 @NgModule({
   declarations: [
-    CategoryListComponent
+    CategoryListComponent,
   ],
   imports: [
     CommonModule

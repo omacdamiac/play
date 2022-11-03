@@ -9,7 +9,6 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { switchMap } from 'rxjs/operators';
 import { ICategory } from 'src/app/core/models';
 @Component({
   selector: 'app-category',
@@ -40,9 +39,9 @@ import { ICategory } from 'src/app/core/models';
 export class CategoryComponent implements OnInit {
   isOpen = false;
   title: string;
-  options: any;
+  listCategory!: ICategory[];
   constructor(
-    private router: Router,
+    // private router: Router,
     private learningService: LearningService
   ) {
     this.title = TITLE_CATEGORY;
@@ -52,16 +51,21 @@ export class CategoryComponent implements OnInit {
     this.learningService.getListCategory().subscribe({
       next: (response: ICategory[]) => {
         this.learningService.setStateDisplay(false);
-        this.options = response;
-      }
-    })
+        this.listCategory = response.filter((category: ICategory) => {
+          if (category.state == true) {
+            return category;
+          }
+          return;
+        });
+      },
+    });
   }
 
-  setOption() {
-    this.router.navigate(['/dashboard/options']);
-  }
+  // setOption() {
+  //   this.router.navigate(['/dashboard/options']);
+  // }
 
-  toggle() {
-    this.isOpen = !this.isOpen;
-  }
+  // toggle() {
+  //   this.isOpen = !this.isOpen;
+  // }
 }

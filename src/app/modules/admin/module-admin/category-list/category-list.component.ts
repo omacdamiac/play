@@ -7,7 +7,7 @@ import { ButtonNsModel } from 'src/app/commons/components/button/model/button-ns
 import { ICategory, IOptions } from 'src/app/core/models';
 import { CategoryService } from '../../commons/service/category.service';
 import { UpdateCategoryComponent } from '../update-category/update-category.component';
-import { take } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import {
   animate,
   state,
@@ -41,6 +41,7 @@ export class CategoryListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   listado: any;
+  items!: any[];
   btnAddCategory = new ButtonNsModel.ButtonClass(
     'Agregar categoría',
     'primary',
@@ -57,6 +58,13 @@ export class CategoryListComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.listCategories();
+    this.listOption();
+  }
+
+  listOption() {
+    this.categoryService
+      .getOption()
+      .subscribe((response) => (this.items = response));
   }
 
   listCategories(): void {
@@ -106,46 +114,34 @@ export class CategoryListComponent implements OnInit {
       .subscribe((_) => this.listCategories());
   }
 
-  viewModalOption(item?: IOptions): void {
+  viewModalOption(opt?: IOptions): void {
     const dialogRef = this.dialog.open(UpdateOptionComponent, {
-      data: item,
+      data: { category: this.listado, option: opt },
       disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe((itemData) => {
-      // console.log(itemData);
-      const idC = this.listado.find((e: any) => {if (e.name === itemData.category)return e});
-      
-      const data = {
-        name: itemData.name,
-        img: itemData.img,
-      };
-      idC.options.push(data);
-      console.log(idC);
-
-      this.saveOption(idC.id, data);
-
-
-      // if (itemData !== undefined) {
-      //   if (itemData.id) {
-      //     this.updateOption(itemData);
-      //   } else {
-      //     this.saveOption(itemData);
-      //   }
-      // }
+      console.log(itemData);
+      if(itemData !== undefined) {
+        if (itemData.id) {
+          this.updateOption(itemData);
+        } else {
+          this.saveOption(itemData);
+        }
+      }
     });
   }
 
-  private saveOption(id: number, userData: any) {
+  private saveOption(userData: IOptions) {
     this.categoryService
-      .newOption(id, userData)
-      .subscribe((_) => this.listCategories());
+      .newOption(userData)
+      .subscribe((_) => this.listOption());
   }
 
   private updateOption(userData: IOptions) {
     this.categoryService
       .updateOption(userData)
-      .subscribe((_) => this.listCategories());
+      .subscribe((_) => this.listOption());
   }
 
   deleteCategory(id: number): void {
@@ -156,8 +152,12 @@ export class CategoryListComponent implements OnInit {
 
   deleteOption(id: number): void {
     this.categoryService
-      .deleteCategory(id)
-      .subscribe((_) => this.listCategories());
+      .deleteOption(id)
+      .subscribe((_) => this.listOption());
+  }
+
+  trackByMethod(index:number, el:any): number {
+    return el.id;
   }
 
   applyFilter(event: Event) {

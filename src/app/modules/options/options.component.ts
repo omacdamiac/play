@@ -40,9 +40,15 @@ export class OptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log(this.id);
+    
     this.learningService.getOption(this.id).subscribe({
-      next: (response: ICategory) => {
-        this.categoriaCurrent = response.options;
+      next: (response: IOptions[]) => {       
+        this.categoriaCurrent = response.filter((option: any) => {
+          if(option.category === this.id){
+            return option
+          }
+        })
         this.currentItem = this.updateRandomImage();
       },
     });
