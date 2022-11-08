@@ -1,11 +1,15 @@
 <div class="container" [formGroup]="formOption">
   <div class="row">
-    <div class="col-12">
-      <h1>Mantenimiento de Opciones</h1>
-    </div>
+    <ng-container *ngIf="data === undefined; else Editar">
+      <h2>Nueva opción</h2>
+    </ng-container>
+    <ng-template #Editar>
+      <h2>Editar opción</h2>
+    </ng-template>
+    <div class="clearfix"></div>
   </div>
   <div class="row align-items-end">
-    <div class="col-4">
+    <div class="col-12">
       <app-select
       [formParent]="formOption"
       [label]="selectCategory.label"
@@ -14,7 +18,10 @@
       [options]="selectCategory.options"
     ></app-select>
     </div>
-    <div class="col-4 text-end">
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-end">
       <mat-slide-toggle
       formControlName="state"
       class="example-margin"
@@ -31,10 +38,10 @@
       [options]="selectLevel.options"
     ></app-select>
     </div> -->
-
+<div class="clearfix"></div>
   </div>
   <div class="row">
-    <div class="col-5">
+    <div class="col-12">
       <app-input
       [formParent]="formOption"
       [label]="inpName.text"
@@ -44,7 +51,10 @@
       [type]="inpName.type"
     ></app-input>
     </div>
-    <div class="col-5">
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-12">
       <app-input
       [formParent]="formOption"
       [label]="inpImg.text"
@@ -52,12 +62,12 @@
       [required]="inpImg.required"
       [name]="inpImg.name"
       [type]="inpImg.type"
-    ></app-input>    </div>
-
+    ></app-input>
   </div>
-
+  </div>
+  <hr>
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
       <ng-container *ngIf="data.option === undefined;else Edit">
         <app-button
         [texto]="btnSave.texto"
@@ -78,6 +88,8 @@
     [color]="btnCancel.color"
     [type]="btnCancel.type"
     (evento)="cancel()"
-  ></app-button>    </div>
+  ></app-button>
+</div>
+<div class="clearfix"></div>
   </div>
 </div>

@@ -52,7 +52,7 @@ export class CategoryComponent implements OnInit {
       next: (response: ICategory[]) => {
         this.learningService.setStateDisplay(false);
         this.listCategory = response.filter((category: ICategory) => {
-          if (category.state == true) {
+          if (category.estado == true) {
             return category;
           }
           return;

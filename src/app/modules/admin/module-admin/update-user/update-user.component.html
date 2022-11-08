@@ -2,11 +2,17 @@
     <!-- <input type="text" formControlName="id" [value]="data.id"> -->
   <div class="row">
     <div class="col-12">
-      <h2>Mantenimiento de usuarios</h2>
+      <ng-container *ngIf="data === undefined;else Editar">
+        <h2>Nuevo usuario</h2>
+      </ng-container>
+      <ng-template #Editar>
+        <h2>Editar usuario</h2>
+      </ng-template>
     </div>
+    <div class="clearfix"></div>
   </div>
   <div class="row">
-    <div class="col-4">
+    <div class="col-12">
         <app-select
         [formParent]="formUser"
         [label]="selectRol.label"
@@ -15,7 +21,10 @@
         [options]="selectRol.options"
       ></app-select>
     </div>
-    <div class="col-4">
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-12">
         <!-- <app-input
         [formParent]="formUser"
         [name]="InpName.name"
@@ -30,7 +39,10 @@
       [type]="InpName.type"
     ></app-input>
     </div>
-    <div class="col-4">
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-12">
         <app-input
         [formParent]="formUser"
         [label]="InpLastName.text"
@@ -38,14 +50,16 @@
         [required]="InpLastName.required"
         [name]="InpLastName.name"
         [type]="InpLastName.type"
-      ></app-input>    </div>
+      ></app-input>
+    </div>
+    <div class="clearfix"></div>
   </div>
   <div class="row">
     <!-- <div class="col-4">
       <label for="">Foto</label>
       <input type="file" accept=".jpg,.png" class="button" (change)="uploadImage($event)" />
       </div> -->
-    <div class="col-4">
+    <div class="col-12">
         <app-input
         [formParent]="formUser"
         [label]="InpUserName.text"
@@ -53,8 +67,12 @@
         [required]="InpUserName.required"
         [name]="InpUserName.name"
         [type]="InpUserName.type"
-      ></app-input>    </div>
-    <div class="col-4">
+      ></app-input>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-12">
         <app-input
         [formParent]="formUser"
         [label]="InpPass.text"
@@ -64,7 +82,10 @@
         [type]="InpPass.type"
       ></app-input>
     </div>
-    <div class="col-4">
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+    <div class="col-12">
         <mat-slide-toggle
         formControlName="state"
         class="example-margin"
@@ -72,10 +93,11 @@
       Estado
     </mat-slide-toggle>
     </div>
+    <div class="clearfix"></div>
   </div>
-
+<hr>
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <ng-container *ngIf="data === undefined;else Edit">
             <app-button
             [texto]="btnSave.texto"
@@ -99,5 +121,6 @@
         (evento)="cancel()"
       ></app-button>
     </div>
+    <div class="clearfix"></div>
   </div>
 </div>

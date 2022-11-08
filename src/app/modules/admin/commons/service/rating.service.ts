@@ -18,4 +18,8 @@ export class RatingService {
   getRating(): Observable<IRating[]> {
     return this.http.get<IRating[]>(this.apiUrl + ENDPOINT.GET_RATING);
   }
+  
+  deleteRating(id: number): Observable<IRating> {
+    return this.http.delete<IRating>(this.apiUrl + ENDPOINT.GET_RATING + '/' + id);
+  }
 }

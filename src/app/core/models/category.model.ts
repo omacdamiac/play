@@ -1,13 +1,13 @@
 export class ICategory {
   id!: number;
-  name!: string;
-  state!: boolean;
+  nombre!: string;
+  estado!: boolean;
 }
 
 export class IOptions {
-  category!: string;
+  padreId!: number;
   id!: number;
   name!: string;
   img!: string;
-  state!: boolean;
+  estado!: boolean;
 }

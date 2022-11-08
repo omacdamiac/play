@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ENDPOINT } from '../../constants/endpoint';
-import { ICategory, IOptions } from '../../models';
+import { IAnswer, ICategory, IOptions, IRating } from '../../models';
 
 export interface IStateUI {
   item:
@@ -43,7 +43,7 @@ export class LearningService {
     item3: undefined,
     item4: undefined,
     item5: undefined,
-};
+  };
 
   // private options = new BehaviorSubject();
   private options = new BehaviorSubject({});
@@ -68,8 +68,14 @@ export class LearningService {
     return this.http.get<ICategory[]>(api);
   }
 
-  getOption(item: number): Observable<IOptions[]> {
+  getOption(): Observable<IOptions[]> {
     const api: string = `${environment.apiBase}${ENDPOINT.GET_ITEM}`;
     return this.http.get<IOptions[]>(api);
   }
+
+  setRating(item: IRating): Observable<IRating> {
+    const api: string = `${environment.apiBase}${ENDPOINT.GET_RATING}`;
+    return this.http.post<IRating>(api, item);
+  }
+
 }

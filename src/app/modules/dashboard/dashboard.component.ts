@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { UTILS } from 'src/app/commons/utils/utils';
 import { BTN_BACK, BTN_OUT, LINK_PANEL } from 'src/app/core/constants/text.const';
 import { IUser } from 'src/app/core/models';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -33,7 +34,6 @@ export class DashboardComponent implements OnInit {
         this.displayModalBG = response;
       }
     });
-   
   }
   ngOnChanges() {
     console.log(this.displayModalBG);
@@ -44,13 +44,11 @@ export class DashboardComponent implements OnInit {
   }
 
   private setData(): void {
-    const userData = this.decode(String(this.authService.getToken()));
-    this.user = userData.user;
-    this.rol = userData.rol;
+    UTILS.getUser(this.authService.getToken());
+    // const userData = this.decode(String(this.authService.getToken()));
+    this.user = UTILS.getUser(this.authService.getToken()).user;
+    this.rol = UTILS.getUser(this.authService.getToken()).rol;
   }
 
-  private decode(tk: string): IUser {
-    const dataTk = JSON.parse(atob(tk));
-    return dataTk;
-  }
+
 }

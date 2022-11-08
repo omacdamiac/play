@@ -53,7 +53,12 @@
 
           <ng-container matColumnDef="categoria">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoría</th>
-            <td mat-cell *matCellDef="let row">{{ row.category }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.category}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Puntaje</th>
+            <td mat-cell *matCellDef="let row">{{ row.points }} pts.</td>
           </ng-container>
 
           <ng-container matColumnDef="respuestas">
@@ -62,20 +67,20 @@
                 <table class="table table-bordered mb-0">
                     <thead>
                         <tr>
-                            <th><img width="30" src="../assets/categorias/{{row.answer['item'].img }}.png" alt="{{row.answer['item'].name }}"> </th>
-                            <th><img width="30" src="../assets/categorias/{{row.answer['item2'].img }}.png" alt="{{row.answer['item2'].name }}"> </th>
-                            <th><img width="30" src="../assets/categorias/{{row.answer['item3'].img }}.png" alt="{{row.answer['item3'].name }}"> </th>
-                            <th><img width="30" src="../assets/categorias/{{row.answer['item4'].img }}.png" alt="{{row.answer['item4'].name }}"> </th>
-                            <th><img width="30" src="../assets/categorias/{{row.answer['item5'].img }}.png" alt="{{row.answer['item5'].name }}"> </th>
+                            <th><img width="30" src="./assets/categorias/{{row.answer['item'].img }}.png" alt="{{row.answer['item'].name }}"> </th>
+                            <th><img width="30" src="./assets/categorias/{{row.answer['item2'].img }}.png" alt="{{row.answer['item2'].name }}"> </th>
+                            <th><img width="30" src="./assets/categorias/{{row.answer['item3'].img }}.png" alt="{{row.answer['item3'].name }}"> </th>
+                            <th><img width="30" src="./assets/categorias/{{row.answer['item4'].img }}.png" alt="{{row.answer['item4'].name }}"> </th>
+                            <th><img width="30" src="./assets/categorias/{{row.answer['item5'].img }}.png" alt="{{row.answer['item5'].name }}"> </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><img width="30" src="../assets/{{ row.answer['item'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item'].answer ? 'bien' : 'mal' }}"></td>
-                            <td><img width="30" src="../assets/{{ row.answer['item2'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item2'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item2'].answer ? 'bien' : 'mal' }}"></td>
-                            <td><img width="30" src="../assets/{{ row.answer['item3'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item3'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item3'].answer ? 'bien' : 'mal' }}"></td>
-                            <td><img width="30" src="../assets/{{ row.answer['item4'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item4'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item4'].answer ? 'bien' : 'mal' }}"></td>
-                            <td><img width="30" src="../assets/{{ row.answer['item5'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item5'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item5'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="./assets/{{ row.answer['item'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="./assets/{{ row.answer['item2'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item2'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item2'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="./assets/{{ row.answer['item3'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item3'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item3'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="./assets/{{ row.answer['item4'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item4'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item4'].answer ? 'bien' : 'mal' }}"></td>
+                            <td><img width="30" src="./assets/{{ row.answer['item5'].answer ? 'bien' : 'mal' }}.png" matTooltip="{{ row.answer['item5'].answer ? 'bien' : 'mal' }}" alt="{{ row.answer['item5'].answer ? 'bien' : 'mal' }}"></td>
                             <!-- <td>{{row.answer['item5'].answer }}</td> -->
                         </tr>
                     </tbody>
@@ -87,7 +92,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Opciones</th>
             <td mat-cell *matCellDef="let row">
                 <!-- <em (click)="updateUser()" class="fa fa-edit h6 link"></em> -->
-                <em (click)="deleteRating()" class="fa fa-trash h5 ms-3 link"></em>
+                <em (click)="delete(row.id)" class="fa fa-trash h5 ms-3 link"></em>
             </td>
           </ng-container>
 

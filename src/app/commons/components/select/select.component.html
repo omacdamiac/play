@@ -18,8 +18,8 @@
     [required]="required"
   >
     <option selected disabled>Seleccionar</option>
-    <option *ngFor="let option of options" [value]="option">
-      {{ option }}
+    <option *ngFor="let option of options" [value]="option.id">
+      {{ option.nombre }}
     </option>
   </select>
 

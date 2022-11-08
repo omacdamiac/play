@@ -38,11 +38,11 @@ export class CategoryService {
   }
 
   // OPTIOMS
-  getOption(): Observable<ICategory[]> {
-    return this.http.get<ICategory[]>(this.apiUrl + ENDPOINT.GET_ITEM);
+  getOption(): Observable<IOptions[]> {
+    return this.http.get<IOptions[]>(this.apiUrl + ENDPOINT.GET_ITEM);
   }
 
-  newOption(opt: ICategory): Observable<IOptions> {
+  newOption(opt: IOptions): Observable<IOptions> {
     return this.http.post<IOptions>(this.apiUrl + ENDPOINT.GET_ITEM, opt);
   }
 

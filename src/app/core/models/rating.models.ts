@@ -1,8 +1,9 @@
-export interface IRating {
-  id: number;
-  category: string;
-  user: string;
-  answer: {
+export class IRating {
+  id?: number;
+  category!: string | number;
+  user!: string;
+  points!: number;
+  answer!: {
     item: IAnswer;
     item2: IAnswer;
     item3: IAnswer;

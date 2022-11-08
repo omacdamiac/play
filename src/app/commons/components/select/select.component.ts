@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ICategory } from 'src/app/core/models';
 
 @Component({
   selector: 'app-select',
@@ -13,7 +14,7 @@ export class SelectComponent implements OnInit {
   @Input() name!: string;
   @Input() formControlName!: string;
   @Input() required!: boolean;
-  @Input() options!: Array<string>;
+  @Input() options!: ICategory[];
 
   constructor() {}
 

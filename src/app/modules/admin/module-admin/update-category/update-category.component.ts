@@ -16,11 +16,11 @@ export class UpdateCategoryComponent implements OnInit {
     'Nombre',
     'Ingrese nombre',
     true,
-    'name',
+    'nombre',
     'text'
   );
   btnSave = new ButtonNsModel.ButtonClass('Guardar', 'primary', 'borde');
-  btnEdit = new ButtonNsModel.ButtonClass('Editar', 'primary', 'borde');
+  btnEdit = new ButtonNsModel.ButtonClass('Modificar', 'primary', 'borde');
   btnCancel = new ButtonNsModel.ButtonClass('Cancelar', 'primary', 'borde');
   get form() {
     return this.formCategory.value;
@@ -33,11 +33,11 @@ export class UpdateCategoryComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formCategory = new FormGroup({
-      state: new FormControl(false),
+      estado: new FormControl(false),
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {        
     if(this.data) {
       setTimeout(() => {
         this.setForm();
@@ -45,15 +45,15 @@ export class UpdateCategoryComponent implements OnInit {
     }
   }
 
-  setForm() {
+  setForm(): void {
     this.formCategory.addControl(ID, new FormControl(this.data.id))
-    this.formCategory.addControl(OPTIONS, new FormControl(this.data.options === [] ? [] : this.data.options))
+    // this.formCategory.addControl(OPTIONS, new FormControl(this.data.options === [] ? [] : this.data.options))
 
-    this.formCtrl.name.setValue(this.data.name);
-    this.formCtrl.state.setValue(this.data.state);
+    this.formCtrl.nombre.setValue(this.data.nombre);
+    this.formCtrl.estado.setValue(this.data.estado);
   }
 
-  saveCategory() {
+  saveCategory(): void {
     this.formCategory.markAllAsTouched();
     if (this.formCategory.valid) {
       this.dialogRef.close(this.form);

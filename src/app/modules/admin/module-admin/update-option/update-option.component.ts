@@ -62,12 +62,8 @@ export class UpdateOptionComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    console.log(this.data);
-    
-    this.selectCategory.options = this.data.category.map((cat: any) => {
-      return cat.name;
-    });
+  ngOnInit(): void {    
+    this.selectCategory.options = this.data.category
     if (this.data) {
       setTimeout(() => {
         this.setForm();
@@ -77,7 +73,7 @@ export class UpdateOptionComponent implements OnInit {
 
   setForm() {
     this.formOption.addControl(ID, new FormControl(this.data.option.id));
-    this.formCtrl.category.setValue(this.data.option.category);
+    this.formCtrl.category.setValue(this.data.option.padreId);
     this.formCtrl.name.setValue(this.data.option.name);
     this.formCtrl.img.setValue(this.data.option.img);
     this.formCtrl.state.setValue(this.data.option.state);

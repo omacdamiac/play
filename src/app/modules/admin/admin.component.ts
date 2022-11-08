@@ -11,58 +11,69 @@ export class AdminComponent implements OnInit {
   displayModalBG!: boolean;
   btn: string;
   out: string;
+
   menu = [
     {
-      header: 'Documentation',
+      header: 'CEBE E-LEARNING',
     },
     {
-      label: 'Get Started',
-      route: '',
+      label: 'Usuarios',
+      route: '/admin',
       iconClasses: 'fa fa-rocket',
     },
     {
-      label: 'Multilevel',
-      iconClasses: 'fa fa-share',
-      roles: ['ADMIN', 'EDITOR'],
-      children: [
-        {
-          label: 'Configuration 1',
-          url: '//google.com',
-          badges: [
-            {
-              label: '1',
-              classes: 'badge--red',
-            },
-          ],
-        },
-        {
-          header: 'Separator',
-        },
-        {
-          label: 'Configuration 2',
-          children: [
-            {
-              label: 'Configuration 1',
-              url: '//google.com',
-            },
-          ],
-        },
-      ],
+      label: 'Categorías',
+      route: '/admin/listas',
+      iconClasses: 'fa fa-rocket',
     },
     {
-      label: 'Badges',
-      iconClasses: 'fa fa-star',
-      url: '//google.com',
-      badges: [
-        {
-          label: 'new',
-          classes: 'badge--red'
-        }, {
-          label: '1',
-          classes: 'badge--blue'
-        },
-      ]
+      label: 'Calificaciones',
+      route: '/admin/rating',
+      iconClasses: 'fa fa-rocket',
     },
+    // {
+    //   label: 'Multilevel',
+    //   iconClasses: 'fa fa-share',
+    //   roles: ['ADMIN', 'EDITOR'],
+    //   children: [
+    //     {
+    //       label: 'Configuration 1',
+    //       url: '//google.com',
+    //       badges: [
+    //         {
+    //           label: '1',
+    //           classes: 'badge--red',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       header: 'Separator',
+    //     },
+    //     {
+    //       label: 'Configuration 2',
+    //       children: [
+    //         {
+    //           label: 'Configuration 1',
+    //           url: '//google.com',
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
+    // {
+    //   label: 'Badges',
+    //   iconClasses: 'fa fa-star',
+    //   url: '//google.com',
+    //   badges: [
+    //     {
+    //       label: 'new',
+    //       classes: 'badge--red'
+    //     }, {
+    //       label: '1',
+    //       classes: 'badge--blue'
+    //     },
+    //   ]
+    // },
   ]
   constructor(private learningService: LearningService) {
     this.btn = BTN_BACK;

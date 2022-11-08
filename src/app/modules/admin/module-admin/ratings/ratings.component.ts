@@ -2,8 +2,9 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { take } from 'rxjs/operators';
-import { IRating } from 'src/app/core/models';
+import { switchMap, take } from 'rxjs/operators';
+import { ICategory, IRating } from 'src/app/core/models';
+import { CategoryService } from '../../commons/service/category.service';
 import { RatingService } from '../../commons/service/rating.service';
 @Component({
   selector: 'app-ratings',
@@ -11,18 +12,26 @@ import { RatingService } from '../../commons/service/rating.service';
   styleUrls: ['./ratings.component.scss']
 })
 export class RatingsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'usuario', 'categoria','respuestas', 'opciones'];
+  displayedColumns: string[] = ['id', 'usuario', 'categoria', 'points','respuestas', 'opciones'];
   dataSource!: MatTableDataSource<IRating>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  categories!: ICategory[];
   constructor(
     private ratingService: RatingService,
+    private categoryService: CategoryService,
   ) {
 
   }
   ngOnInit(): void {
+    this.listCat()
     this.listRaring()
+  }
+
+  listCat(){
+    this.categoryService.getCategories().subscribe({
+    next:  res => this.categories = res
+    })
   }
 
   listRaring(): void {
@@ -39,7 +48,11 @@ export class RatingsComponent implements OnInit {
     })
   }
 
-  deleteRating() {}
+  delete(id: number): void {
+    this.ratingService.deleteRating(id).subscribe({
+      next: () => this.listRaring()
+    })
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -57,7 +57,7 @@ export class UpdateUserComponent implements OnInit {
     'text'
   );
   btnSave = new ButtonNsModel.ButtonClass('Guardar', 'primary', 'borde');
-  btnEdit = new ButtonNsModel.ButtonClass('Editar', 'primary', 'borde');
+  btnEdit = new ButtonNsModel.ButtonClass('Modificar', 'primary', 'borde');
   btnCancel = new ButtonNsModel.ButtonClass('Cancelar', 'primary', 'borde');
   get form() {
     return this.formUser.value;

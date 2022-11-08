@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UTILS } from 'src/app/commons/utils/utils';
 import {
   BTN_NEXT,
   BTN_NOT,
   BTN_YES,
   LINK_GO_MAIN,
 } from 'src/app/core/constants/text.const';
-import { ICategory, IOptions } from 'src/app/core/models';
+import { ICategory, IOptions, IRating } from 'src/app/core/models';
 import { IOptionsData } from 'src/app/core/models/options.model';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { LearningService } from 'src/app/core/services/learning/learning.service';
 
 @Component({
@@ -28,7 +30,8 @@ export class OptionsComponent implements OnInit {
   currentItem: any;
   constructor(
     private route: ActivatedRoute,
-    private learningService: LearningService
+    private learningService: LearningService,
+    private authService: AuthService,
   ) {
     this.display = false;
     this.displayCongratulation = false;
@@ -40,18 +43,16 @@ export class OptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log(this.id);
-    
-    this.learningService.getOption(this.id).subscribe({
-      next: (response: IOptions[]) => {       
+    this.learningService.getOption().subscribe({
+      next: (response: IOptions[]) => {
         this.categoriaCurrent = response.filter((option: any) => {
-          if(option.category === this.id){
-            return option
+          if (option.padreId === Number(this.id)) {            
+            return option;
           }
-        })
+        });
         this.currentItem = this.updateRandomImage();
       },
-    });
+    });    
   }
 
   updateRandomImage(n?: number) {
@@ -62,20 +63,23 @@ export class OptionsComponent implements OnInit {
   }
 
   validate(item: ICategory, value: boolean | null): void {
-    console.log(this.categoriaCurrent);
     this.categoriaCurrent.filter((element: IOptions) => {
       if (element.id === item.id) {
         this.removeItemFromArr(this.categoriaCurrent, element);
       }
     });
-    const max = this.categoriaCurrent.length;
-    console.log(max);
+    const count = this.categoriaCurrent.length;
 
     const data = { ...item, ...{ answer: value } };
     this.validateOption(data);
 
-    if (max === 0) {
-      this.learningService.clearState();
+    if (count === 0) {
+      this.learningService
+        .setRating(this.sendRequest(this.learningService.getState()))
+        .subscribe();
+      
+      // this.learningService.clearState();
+
       this.displayCongratulation = true;
       this.learningService.setStateDisplay(true);
     } else {
@@ -114,18 +118,25 @@ export class OptionsComponent implements OnInit {
       case 5:
         this.learningService.setState({ item5: data });
         break;
-
       default:
         this.learningService.setState({ item: data });
         break;
     }
-
-    console.log(this.learningService.getState());
   }
 
   removeItemFromArr(arr: IOptions[], item: IOptions) {
     var i = arr.indexOf(item);
     arr.splice(i, 1);
+  }
+
+  sendRequest(obj: any): IRating {    
+    const sendData = {
+      category: Number(this.id),
+      user: UTILS.getUser(this.authService.getToken()).user,
+      points: UTILS.points(obj),
+      answer: obj,
+    }
+     return sendData;
   }
 
   // ngOnDestroy() {

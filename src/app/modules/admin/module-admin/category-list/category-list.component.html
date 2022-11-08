@@ -60,7 +60,7 @@
                     </thead>
                     <tbody>
                       <ng-container *ngFor="let item of items; trackBy: trackByMethod">
-                        <tr *ngIf="item.category == element.name">
+                        <tr *ngIf="item.padreId == element.id">
                           <td>{{ item.id }}</td>
                           <td>{{ item.name }}</td>
                           <td>{{ item.img }}</td>
@@ -82,17 +82,16 @@
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
             <td mat-cell *matCellDef="let row">
-              <em (click)="viewModal(row)" class="fa fa-edit h6 link"></em>
-              <em (click)="deleteCategory(row.id)" class="fa fa-trash h6 ms-3 link"></em>
+              <em (click)="viewModal(row, items)" matTooltip="Editar" class="fa fa-edit h6 link"></em>
+              <em (click)="deleteCategory(row.id)" matTooltip="Eliminar" class="fa fa-trash h6 ms-3 link"></em>
+              <em  (click)="expandedElement = expandedElement === row ? null : row" matTooltip="Mostrar items" class="fa fa-list h6 ms-3 link"></em>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-          <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand" class="example-element-row"
-            [class.example-expanded-row]="expandedElement === element" (click)="
-              expandedElement = expandedElement === element ? null : element
-            "></tr>
-          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row">123</tr>
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand" class="example-element-row-"
+            [class.example-expanded-row]="expandedElement === element"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">
               No data matching the filter "{{ input.value }}"

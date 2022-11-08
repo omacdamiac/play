@@ -33,7 +33,7 @@ import { UpdateOptionComponent } from '../update-option/update-option.component'
   ],
 })
 export class CategoryListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'state'];
+  displayedColumns: string[] = ['id', 'nombre', 'estado'];
   columnsToDisplayWithExpand = [...this.displayedColumns, 'acciones'];
   expandedElement: any | null;
 
@@ -85,13 +85,22 @@ export class CategoryListComponent implements OnInit {
       });
   }
 
-  viewModal(cat?: ICategory): void {
+  viewModal(cat?: ICategory, opt?: IOptions[]): void {
+    // console.log(cat);
+    // console.log(opt);
+
+    // opt?.filter((o: IOptions)=>{
+    //   if(o.category === cat?.nombre) {
+    //     console.log(o);
+    //   }
+    // })
+
     const dialogRef = this.dialog.open(UpdateCategoryComponent, {
       data: cat,
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((catData) => {
+    dialogRef.afterClosed().subscribe((catData) => {      
       if (catData !== undefined) {
         if (catData.id) {
           this.update(catData);
@@ -121,8 +130,7 @@ export class CategoryListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((itemData) => {
-      console.log(itemData);
-      if(itemData !== undefined) {
+      if (itemData !== undefined) {
         if (itemData.id) {
           this.updateOption(itemData);
         } else {
@@ -151,12 +159,10 @@ export class CategoryListComponent implements OnInit {
   }
 
   deleteOption(id: number): void {
-    this.categoryService
-      .deleteOption(id)
-      .subscribe((_) => this.listOption());
+    this.categoryService.deleteOption(id).subscribe((_) => this.listOption());
   }
 
-  trackByMethod(index:number, el:any): number {
+  trackByMethod(index: number, el: any): number {
     return el.id;
   }
 
