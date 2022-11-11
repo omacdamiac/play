@@ -3,7 +3,9 @@
     <div class="row m-0 rounded-3 bor- h-100">
         <div class="h-50"></div>
         <div class="col-6 offset-6 h-50">
-            <h1 class="bienvenido">BIENVENIDOS</h1>
+          <form [formGroup]="form" (keyup)="keySend($event)">
+            <h3>BIENVENIDOS</h3>
+            <h1 class="bienvenido">SISTEMA CEBE-LEARNING</h1>
             <div class="input-group input-group-lg">
                 <app-input
                 [formParent]="form"
@@ -30,6 +32,7 @@
                 [type]="btnIntro.type"
                 (evento)="auth()"
                 ></app-button>
+              </form>
         </div>
     </div>
 </div>

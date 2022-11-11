@@ -1,10 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ButtonNsModel } from 'src/app/commons/components/button/model/button-ns.model';
 import { InputNsModel } from 'src/app/commons/components/input/model/input-ns.model';
 import { SelectNsModel } from 'src/app/commons/components/select/model/select-ns.model';
 import { ID, LIST_PROFILE } from 'src/app/core/constants/text.const';
+import { UsersService } from '../../commons/service/users.service';
 
 @Component({
   selector: 'app-update-user',
@@ -21,13 +22,7 @@ export class UpdateUserComponent implements OnInit {
     LIST_PROFILE
   );
 
-  InpId = new InputNsModel.InputClass(
-    '',
-    '',
-    false,
-    'id',
-    'text'
-  );
+  InpId = new InputNsModel.InputClass('', '', false, 'id', 'text');
   InpName = new InputNsModel.InputClass(
     'Nombre',
     'Ingrese nombre',
@@ -67,16 +62,20 @@ export class UpdateUserComponent implements OnInit {
   }
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     public dialogRef: MatDialogRef<UpdateUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formUser = new FormGroup({
       state: new FormControl(false),
+      avatar: new FormControl(),
     });
   }
 
   ngOnInit(): void {
-    if(this.data) {
+    console.log(this.data);
+
+    if (this.data) {
       setTimeout(() => {
         this.setForm();
       });
@@ -84,16 +83,21 @@ export class UpdateUserComponent implements OnInit {
   }
 
   setForm() {
-    this.formUser.addControl(ID, new FormControl(this.data.id))
+    this.formUser.addControl(ID, new FormControl(this.data.id));
     this.formCtrl.name.setValue(this.data.name);
     this.formCtrl.lastName.setValue(this.data.lastName);
     this.formCtrl.rol.setValue(this.data.rol);
     this.formCtrl.user.setValue(this.data.user);
     this.formCtrl.state.setValue(this.data.state);
     this.formCtrl.pass.setValue(this.data.pass);
+    // this.formCtrl.avatar.setValue(this.data.avatar);
+    this.profileImage = this.data.avatar;
+    // this.Imageloaded = true;
   }
 
   saveUser() {
+    console.log(this.form);
+    
     this.formUser.markAllAsTouched();
     if (this.formUser.valid) {
       this.dialogRef.close(this.form);
@@ -104,7 +108,25 @@ export class UpdateUserComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  uploadImage(files: any) {
-    console.log(files.target.files);
+  profileImage: any;
+  Imageloaded: boolean = false;
+
+  imageUpload(event: any) {
+    var file = event.target.files.length;
+    for (let i = 0; i < file; i++) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.profileImage = event.target.result;
+        this.changeDetector.detectChanges();
+
+        console.log(this.profileImage);
+        this.formCtrl.avatar.setValue(this.profileImage)
+      };
+      reader.readAsDataURL(event.target.files[i]);
+    }
+  }
+
+  handleImageLoad() {
+    this.Imageloaded = true;
   }
 }

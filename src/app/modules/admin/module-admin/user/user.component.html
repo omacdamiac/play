@@ -58,13 +58,19 @@
 
           <ng-container matColumnDef="rol">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
-            <td mat-cell *matCellDef="let row">{{ row.rol }}</td>
+            <td mat-cell *matCellDef="let row" [ngSwitch]="row.rol">
+              <span *ngSwitchCase="1">Administrador</span>
+              <span *ngSwitchCase="2">Docente</span>
+              <span *ngSwitchCase="3">Alumno</span>
+              <span *ngSwitchDefault>(Sin categoría)</span>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="avatar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Foto</th>
             <td mat-cell *matCellDef="let row">
-              <img width="30" appNotImage src="./assets/user/{{ row?.avatar }}.jpg" alt="{{ row?.avatar }}">
+              <!-- <img width="30" appNotImage src="./assets/user/{{ row?.avatar }}.jpg" alt="{{ row?.avatar }}"> -->
+              <img width="30" appNotImage src="{{ row.avatar }}" alt="{{ row?.avatar }}">
             </td>
           </ng-container>
 

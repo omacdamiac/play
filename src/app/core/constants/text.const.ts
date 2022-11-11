@@ -10,11 +10,10 @@ export const LINK_PANEL = 'PANEL';
 
 //ADMIN
 
-export const LIST_PROFILE = ['administrador', 'docente', 'alumno'];
+export const LIST_PROFILE = [
+  { id: 1, nombre: 'administrador' },
+  { id: 2, nombre: 'docente' },
+  { id: 3, nombre: 'alumno' },
+];
 export const ID = 'id';
 export const OPTIONS = 'options';
-// export const LIST_PROFILE = [
-//   { id: 1, profile: 'administrador' },
-//   { id: 2, profile: 'docente' },
-//   { id: 3, profile: 'alumno' },
-// ];

@@ -55,6 +55,14 @@
     <div class="clearfix"></div>
   </div>
   <div class="row">
+    <div class="col-12">
+      <input mat-input type="file" accept=".jpg,.png" (change)="imageUpload($event)">
+    </div>
+    <img [src]="profileImage" (load)="handleImageLoad()" class="imgView">
+    <input type="hidden" formControlName="avatar">
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
     <!-- <div class="col-4">
       <label for="">Foto</label>
       <input type="file" accept=".jpg,.png" class="button" (change)="uploadImage($event)" />

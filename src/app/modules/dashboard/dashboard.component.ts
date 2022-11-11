@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { UTILS } from 'src/app/commons/utils/utils';
-import { BTN_BACK, BTN_OUT, LINK_PANEL } from 'src/app/core/constants/text.const';
+import { BTN_BACK, BTN_OUT, LINK_PANEL, LIST_PROFILE } from 'src/app/core/constants/text.const';
 import { IUser } from 'src/app/core/models';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { LearningService } from 'src/app/core/services/learning/learning.service';
@@ -14,7 +14,8 @@ export class DashboardComponent implements OnInit {
   btn: string;
   out: string;
   user!: string;
-  rol!: string;
+  rol!: number;
+  role!: string;
   admin: string;
   displayModalBG!: boolean;
   constructor(
@@ -47,7 +48,9 @@ export class DashboardComponent implements OnInit {
     UTILS.getUser(this.authService.getToken());
     // const userData = this.decode(String(this.authService.getToken()));
     this.user = UTILS.getUser(this.authService.getToken()).user;
+    // this.rol = UTILS.getUser(this.authService.getToken()).rol;
     this.rol = UTILS.getUser(this.authService.getToken()).rol;
+    this.role = LIST_PROFILE[this.rol - 1].nombre;
   }
 
 

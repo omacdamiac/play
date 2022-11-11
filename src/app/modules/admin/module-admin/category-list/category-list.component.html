@@ -63,7 +63,7 @@
                         <tr *ngIf="item.padreId == element.id">
                           <td>{{ item.id }}</td>
                           <td>{{ item.name }}</td>
-                          <td>{{ item.img }}</td>
+                          <td class="text-center"><img class="imgView" [src]="item.img"></td>
                           <td><span [class]="item.state ? 'activo' : 'inactivo'">{{item.state ? 'activo' : 'inactivo'}}</span></td>
                           <td>
                             <em (click)="viewModalOption(item)" class="fa fa-edit h6 link"></em>

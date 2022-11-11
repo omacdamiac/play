@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class UpdateOptionComponent implements OnInit {
   formOption: FormGroup;
   selectCategory = new SelectNsModel.SelectClass(
     'Asigna una categoría',
-    'category',
+    'padreId',
     true,
     ''
   );
@@ -36,13 +36,13 @@ export class UpdateOptionComponent implements OnInit {
     'name',
     'text'
   );
-  inpImg = new InputNsModel.InputClass(
-    'Imagen de opción',
-    'Ingrese nombre de la imagen',
-    true,
-    'img',
-    'text'
-  );
+  // inpImg = new InputNsModel.InputClass(
+  //   'Imagen de opción',
+  //   'Ingrese nombre de la imagen',
+  //   true,
+  //   'img',
+  //   'text'
+  // );
   btnSave = new ButtonNsModel.ButtonClass('Guardar', 'primary', 'borde');
   btnEdit = new ButtonNsModel.ButtonClass('Editar', 'primary', 'borde');
   btnCancel = new ButtonNsModel.ButtonClass('Cancelar', 'primary', 'borde');
@@ -53,12 +53,13 @@ export class UpdateOptionComponent implements OnInit {
     return this.formOption.controls;
   }
   constructor(
-    private categoryService: CategoryService,
+    private changeDetector: ChangeDetectorRef,
     public dialogRef: MatDialogRef<UpdateOptionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formOption = new FormGroup({
       state: new FormControl(false),
+      img: new FormControl(),
     });
   }
 
@@ -73,10 +74,11 @@ export class UpdateOptionComponent implements OnInit {
 
   setForm() {
     this.formOption.addControl(ID, new FormControl(this.data.option.id));
-    this.formCtrl.category.setValue(this.data.option.padreId);
+    this.formCtrl.padreId.setValue(this.data.option.padreId);
     this.formCtrl.name.setValue(this.data.option.name);
-    this.formCtrl.img.setValue(this.data.option.img);
+    // this.formCtrl.img.setValue(this.data.option.img);
     this.formCtrl.state.setValue(this.data.option.state);
+    this.profileImage = this.data.option.img;
   }
 
   saveOption() {
@@ -85,5 +87,27 @@ export class UpdateOptionComponent implements OnInit {
 
   cancel(): void {
     this.dialogRef.close();
+  }
+
+  profileImage: any;
+  Imageloaded: boolean = false;
+
+  imageUpload(event: any) {
+    var file = event.target.files.length;
+    for (let i = 0; i < file; i++) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.profileImage = event.target.result;
+        this.changeDetector.detectChanges();
+
+        console.log(this.profileImage);
+        this.formCtrl.img.setValue(this.profileImage)
+      };
+      reader.readAsDataURL(event.target.files[i]);
+    }
+  }
+
+  handleImageLoad() {
+    this.Imageloaded = true;
   }
 }

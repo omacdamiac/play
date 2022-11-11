@@ -1,4 +1,5 @@
-import { IUser } from 'src/app/core/models';
+import { LIST_PROFILE } from 'src/app/core/constants/text.const';
+import { ILIST_PROFILE, IUser } from 'src/app/core/models';
 
 export class UTILS {
   static getUser(jwt: string | null): IUser {
@@ -22,4 +23,13 @@ export class UTILS {
       return ((arraObjTrue.length + arraObjFalse.length) - arraObjFalse.length) / 5;
     }
   }
+
+  // static getRol(rol: number): ILIST_PROFILE[] {
+  //  const setRol =  LIST_PROFILE.filter((r: ILIST_PROFILE) => {
+  //     if(r.id === rol) {
+  //       return r
+  //     }
+  //   });
+  //   return setRol;
+  // }
 }

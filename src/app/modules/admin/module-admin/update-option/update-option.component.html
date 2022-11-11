@@ -55,6 +55,14 @@
   </div>
   <div class="row">
     <div class="col-12">
+      <input mat-input type="file" accept=".jpg,.png" (change)="imageUpload($event)">
+    </div>
+    <img [src]="profileImage" (load)="handleImageLoad()" class="imgView">
+    <input type="hidden" formControlName="img">
+    <div class="clearfix"></div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-12">
       <app-input
       [formParent]="formOption"
       [label]="inpImg.text"
@@ -64,7 +72,7 @@
       [type]="inpImg.type"
     ></app-input>
   </div>
-  </div>
+  </div> -->
   <hr>
   <div class="row">
     <div class="col-12">

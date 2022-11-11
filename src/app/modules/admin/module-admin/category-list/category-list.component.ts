@@ -124,12 +124,16 @@ export class CategoryListComponent implements OnInit {
   }
 
   viewModalOption(opt?: IOptions): void {
+    console.log(opt);
+    
     const dialogRef = this.dialog.open(UpdateOptionComponent, {
       data: { category: this.listado, option: opt },
       disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe((itemData) => {
+      console.log(itemData);
+
       if (itemData !== undefined) {
         if (itemData.id) {
           this.updateOption(itemData);

@@ -35,4 +35,8 @@ export class UsersService {
       this.apiUrl + ENDPOINT.GET_USERS + '/' + userId,
     );
   }
+
+  upload(file: any) {
+    return this.http.post(this.apiUrl + ENDPOINT.GET_USERS , file)
+  }
 }

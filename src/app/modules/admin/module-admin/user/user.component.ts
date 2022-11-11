@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   listProfile!: IProfileCMB[];
 
-  btnAdd = new ButtonNsModel.ButtonClass('Agregar', 'primary', 'borde');
+  btnAdd = new ButtonNsModel.ButtonClass('Agregar usuario', 'primary', 'borde');
   constructor(private usersService: UsersService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -62,6 +62,8 @@ export class UserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((userData) => {
+      console.log(userData);
+      
       if (userData !== undefined) {
         if (userData.id) {
           this.update(userData);

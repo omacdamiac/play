@@ -2,6 +2,9 @@
 @import "./scss/variables";
 @import "~font-awesome/css/font-awesome.css";
 @import "~angular-sidebar-menu/themes/admin-lte.scss";
+
+@import '~ngx-toastr/toastr';
+
 html, body { height: 100%; }
 body {
     font-size: $font-size;
@@ -93,4 +96,10 @@ th {
 
 .row{
     margin-bottom: 10px;
+}
+
+.imgView{
+    width: 60px;
+    height: auto;
+    
 }
