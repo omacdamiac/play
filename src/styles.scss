@@ -3,15 +3,18 @@
 @import "~font-awesome/css/font-awesome.css";
 @import "~angular-sidebar-menu/themes/admin-lte.scss";
 
-@import '~ngx-toastr/toastr';
+@import "~ngx-toastr/toastr";
 
-html, body { height: 100%; }
+html,
+body {
+    height: 100%;
+}
 body {
     font-size: $font-size;
     font-family: "Milky Coffee";
     color: $orange;
     background-image: radial-gradient(circle, #6101a1, #56018f, #4b017d, #40016b, #36015a);
-    margin: 0
+    margin: 0;
 }
 .corner {
     background: url(./assets/corner.png);
@@ -71,7 +74,7 @@ th {
     }
 }
 
-.activo{
+.activo {
     background: green;
     color: white;
     font-size: 11px;
@@ -79,7 +82,7 @@ th {
     padding: 3px 10px;
     border-radius: 5px;
 }
-.inactivo{
+.inactivo {
     background: red;
     color: white;
     font-size: 11px;
@@ -88,18 +91,16 @@ th {
     border-radius: 5px;
 }
 
-.mat-dialog-container{
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+.mat-dialog-container {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 12px;
-
 }
 
-.row{
+.row {
     margin-bottom: 10px;
 }
 
-.imgView{
+.imgView {
     width: 60px;
     height: auto;
-    
 }

@@ -38,7 +38,7 @@
         <h1>¿Es un(a) {{ currentItem?.name }}?</h1>
         <div class="cdr">
             <div class="cdr__content">
-                <img src="./assets/categorias/{{ currentItem?.img }}.png" alt="">
+                <img [src]="currentItem?.img" [alt]="currentItem?.name">
             </div>
         </div>
         

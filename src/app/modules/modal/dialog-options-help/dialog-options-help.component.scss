@@ -1,0 +1,32 @@
+@import "../../../../scss/variables";
+
+th,
+td {
+    text-align: center;
+    border-bottom: 1px solid $purple;
+}
+td {
+    vertical-align: middle;
+    font-family: "Milky Coffee";
+    font-size: 24px;
+    color: $magenta;
+    font-weight: bold;
+    -webkit-text-stroke: 1px $purple;
+}
+.btn_next {
+    background: transparent;
+    width: auto;
+    padding: 0 25px;
+    height: 50px;
+    font-family: "Milky Coffee";
+    background-color: $purple_light;
+    -moz-border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+    -webkit-border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+    border-radius: 20% 40% 40% 20%/42% 80% 80% 40%;
+    box-shadow: -10px 10px 0px $purple;
+    font-size: 30px;
+    color: $magenta;
+    -webkit-text-stroke: 1px $purple;
+    border: 1px solid $purple;
+    margin-right: 20px;
+}

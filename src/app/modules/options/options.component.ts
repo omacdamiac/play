@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { UTILS } from 'src/app/commons/utils/utils';
 import {
@@ -11,6 +12,7 @@ import { ICategory, IOptions, IRating } from 'src/app/core/models';
 import { IOptionsData } from 'src/app/core/models/options.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { LearningService } from 'src/app/core/services/learning/learning.service';
+import { DialogOptionsHelpComponent } from '../modal/dialog-options-help/dialog-options-help.component';
 
 @Component({
   selector: 'app-options',
@@ -32,6 +34,7 @@ export class OptionsComponent implements OnInit {
     private route: ActivatedRoute,
     private learningService: LearningService,
     private authService: AuthService,
+    public dialog: MatDialog,
   ) {
     this.display = false;
     this.displayCongratulation = false;
@@ -51,8 +54,22 @@ export class OptionsComponent implements OnInit {
           }
         });
         this.currentItem = this.updateRandomImage();
+        this.openDialog(this.categoriaCurrent);
       },
-    });    
+    });
+  }
+
+  openDialog(datos: any): void {
+    const dialogRef = this.dialog.open(DialogOptionsHelpComponent, {
+      width: '500px',
+      data: datos,
+      disableClose: true,
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.animal = result;
+    // });
   }
 
   updateRandomImage(n?: number) {

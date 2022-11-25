@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OptionsComponent } from './options.component';
+import { DialogOptionsHelpComponent } from './dialog-options-help.component';
+
 
 @NgModule({
   declarations: [
-    OptionsComponent,
+    DialogOptionsHelpComponent
   ],
   imports: [
     CommonModule,
   ]
 })
-export class OptionsModule { }
+export class DialogOptionsHelpModule { }

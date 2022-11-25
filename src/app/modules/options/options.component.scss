@@ -53,7 +53,10 @@ img {
         }
     }
 }
-
+::ng-deep .cdk-overlay-pane {
+    border: 10px solid $magenta;
+    border-radius: 12px;
+}
 .btn {
     &_next {
         background: transparent;
