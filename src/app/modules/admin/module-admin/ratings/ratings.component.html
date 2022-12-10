@@ -53,7 +53,7 @@
 
           <ng-container matColumnDef="categoria">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoría</th>
-            <td mat-cell *matCellDef="let row">{{ row.category}}</td>
+            <td mat-cell *matCellDef="let row">{{categories[row.category - 1].nombre}}</td>
           </ng-container>
 
           <ng-container matColumnDef="points">
@@ -67,11 +67,11 @@
                 <table class="table table-bordered mb-0">
                     <thead>
                         <tr>
-                            <th><img width="30" src="./assets/categorias/{{row.answer['item'].img }}.png" alt="{{row.answer['item'].name }}"> </th>
-                            <th><img width="30" src="./assets/categorias/{{row.answer['item2'].img }}.png" alt="{{row.answer['item2'].name }}"> </th>
-                            <th><img width="30" src="./assets/categorias/{{row.answer['item3'].img }}.png" alt="{{row.answer['item3'].name }}"> </th>
-                            <th><img width="30" src="./assets/categorias/{{row.answer['item4'].img }}.png" alt="{{row.answer['item4'].name }}"> </th>
-                            <th><img width="30" src="./assets/categorias/{{row.answer['item5'].img }}.png" alt="{{row.answer['item5'].name }}"> </th>
+                            <th><img width="30" src="{{row.answer['item'].img }}" alt="{{row.answer['item'].name }}"> </th>
+                            <th><img width="30" src="{{row.answer['item2'].img }}" alt="{{row.answer['item2'].name }}"> </th>
+                            <th><img width="30" src="{{row.answer['item3'].img }}" alt="{{row.answer['item3'].name }}"> </th>
+                            <th><img width="30" src="{{row.answer['item4'].img }}" alt="{{row.answer['item4'].name }}"> </th>
+                            <th><img width="30" src="{{row.answer['item5'].img }}" alt="{{row.answer['item5'].name }}"> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +92,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Opciones</th>
             <td mat-cell *matCellDef="let row">
                 <!-- <em (click)="updateUser()" class="fa fa-edit h6 link"></em> -->
-                <em (click)="delete(row.id)" class="fa fa-trash h5 ms-3 link"></em>
+                <em matTooltip="Eliminar ID: {{row.id}}" (click)="delete(row.id)" class="fa fa-trash h5 ms-3 link"></em>
             </td>
           </ng-container>
 
@@ -102,7 +102,7 @@
           <!-- Row shown when there is no matching data. -->
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">
-              No data matching the filter "{{ input.value }}"
+              No se encontro datos "{{ input.value }}"
             </td>
           </tr>
         </table>

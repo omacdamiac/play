@@ -17,14 +17,13 @@ export class DialogOptionsHelpComponent implements OnInit {
   
   constructor(
     public dialogRef: MatDialogRef<DialogOptionsHelpComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    ) {}
 
 
 
   ngOnInit(): void {
     console.log(this.data);
-    
-    
   }
 
   go() {

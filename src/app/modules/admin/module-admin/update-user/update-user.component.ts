@@ -68,13 +68,11 @@ export class UpdateUserComponent implements OnInit {
   ) {
     this.formUser = new FormGroup({
       state: new FormControl(false),
-      avatar: new FormControl(),
+      avatar: new FormControl(this.data ? this.data.avatar : ''),
     });
   }
 
   ngOnInit(): void {
-    console.log(this.data);
-
     if (this.data) {
       setTimeout(() => {
         this.setForm();
@@ -82,7 +80,7 @@ export class UpdateUserComponent implements OnInit {
     }
   }
 
-  setForm() {
+  setForm() {    
     this.formUser.addControl(ID, new FormControl(this.data.id));
     this.formCtrl.name.setValue(this.data.name);
     this.formCtrl.lastName.setValue(this.data.lastName);
@@ -90,14 +88,12 @@ export class UpdateUserComponent implements OnInit {
     this.formCtrl.user.setValue(this.data.user);
     this.formCtrl.state.setValue(this.data.state);
     this.formCtrl.pass.setValue(this.data.pass);
-    // this.formCtrl.avatar.setValue(this.data.avatar);
+    // this.formCtrl.avatar.setValue('sala.jpg');
     this.profileImage = this.data.avatar;
     // this.Imageloaded = true;
   }
 
-  saveUser() {
-    console.log(this.form);
-    
+  saveUser() {   
     this.formUser.markAllAsTouched();
     if (this.formUser.valid) {
       this.dialogRef.close(this.form);
@@ -116,10 +112,10 @@ export class UpdateUserComponent implements OnInit {
     for (let i = 0; i < file; i++) {
       var reader = new FileReader();
       reader.onload = (event: any) => {
-        this.profileImage = event.target.result;
+        this.profileImage = this.data ? this.data.avatar : event.target.result;
         this.changeDetector.detectChanges();
 
-        console.log(this.profileImage);
+        // console.log(this.profileImage);
         this.formCtrl.avatar.setValue(this.profileImage)
       };
       reader.readAsDataURL(event.target.files[i]);

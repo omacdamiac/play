@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { ButtonNsModel } from 'src/app/commons/components/button/model/button-ns.model';
@@ -59,7 +59,7 @@ export class UpdateOptionComponent implements OnInit {
   ) {
     this.formOption = new FormGroup({
       state: new FormControl(false),
-      img: new FormControl(),
+      img: new FormControl('', Validators.required),
     });
   }
 
@@ -81,8 +81,11 @@ export class UpdateOptionComponent implements OnInit {
     this.profileImage = this.data.option.img;
   }
 
-  saveOption() {
-    this.dialogRef.close(this.form);
+  saveOption() {    
+    this.formOption.markAllAsTouched();
+    if(this.formOption.valid) {
+      this.dialogRef.close(this.form);
+    }
   }
 
   cancel(): void {
@@ -100,7 +103,7 @@ export class UpdateOptionComponent implements OnInit {
         this.profileImage = event.target.result;
         this.changeDetector.detectChanges();
 
-        console.log(this.profileImage);
+        // console.log(this.profileImage);
         this.formCtrl.img.setValue(this.profileImage)
       };
       reader.readAsDataURL(event.target.files[i]);

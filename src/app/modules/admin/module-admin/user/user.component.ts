@@ -9,6 +9,7 @@ import { ButtonNsModel } from 'src/app/commons/components/button/model/button-ns
 import { LIST_PROFILE } from 'src/app/core/constants/text.const';
 import { IProfileCMB, IUser } from 'src/app/core/models';
 import { UsersService } from '../../commons/service/users.service';
+import { SesionComponent } from '../sesion/sesion.component';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 
 @Component({
@@ -62,8 +63,6 @@ export class UserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((userData) => {
-      console.log(userData);
-      
       if (userData !== undefined) {
         if (userData.id) {
           this.update(userData);
@@ -72,6 +71,14 @@ export class UserComponent implements OnInit {
         }
       }
     });
+  }
+  
+  sesiones(user?: any): void {
+    const dialogRef2 = this.dialog.open(SesionComponent, {
+      data: user.user,
+      disableClose: true,
+    });
+    dialogRef2.afterClosed().subscribe();
   }
 
   private save(userData: IUser) {

@@ -54,6 +54,7 @@ export class AuthComponent implements OnInit {
         if (user) {
           this.router.navigate(['/dashboard']);
           const userCode = btoa(JSON.stringify(user));
+          this.setSession(userCode);
           this.authService.setToken(userCode);
         } else {
           // alert('ERROR')
@@ -63,11 +64,21 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  keySend(btn: any) {
-    let key = btn.keyCode;
-    console.log(key);
-    if (key === 13) {
-      this.auth();
+  private setSession(u: any) {
+    const dataUser = {
+      // id: 1,
+      user: JSON.parse(atob(u)).user,
+      dia : new Date().toLocaleDateString(),
+      hora : new Date().toLocaleTimeString(),
     }
+    this.authService.sesion(dataUser).subscribe()
   }
+
+  // keySend(btn: any) {
+  //   let key = btn.keyCode;
+  //   console.log(key);
+  //   if (key === 13) {
+  //     this.auth();
+  //   }
+  // }
 }

@@ -31,4 +31,8 @@ export class AuthService {
     sessionStorage.removeItem(TOKEN);
   }
 
+  sesion(sesion: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + ENDPOINT.SET_BRAND, sesion)
+  }
+
 }

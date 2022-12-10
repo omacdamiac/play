@@ -1,0 +1,70 @@
+<em  [mat-dialog-close]="true" class="fa fa-close float-right"></em>
+
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h3>Reporte de Inicio de Sesión</h3>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+          <!-- <mat-form-field appearance="standard">
+            <mat-label>Filtro de búsqueda</mat-label>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="Henry"
+              #input
+            />
+          </mat-form-field> -->
+    <!-- <h5>Sesiones: {{sesionesCount}}</h5> -->
+          <div class="mat-elevation-z8" *ngIf="dataSource">
+            <table mat-table [dataSource]="dataSource" matSort>
+              <!-- <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+              </ng-container> -->
+    
+              <ng-container matColumnDef="usuario">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+                <td mat-cell *matCellDef="let row">{{ row.user }}</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="dia">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Día</th>
+                <td mat-cell *matCellDef="let row">{{ row.dia }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="hora">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora</th>
+                <td mat-cell *matCellDef="let row">{{ row.hora }}</td>
+              </ng-container>
+    
+              <ng-container matColumnDef="opciones">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Opciones</th>
+                <td mat-cell *matCellDef="let row">
+                    <!-- <em (click)="updateUser()" class="fa fa-edit h6 link"></em> -->
+                    <!-- <em matTooltip="Eliminar ID: {{row.id}}" (click)="delete(row.id)" class="fa fa-trash h5 ms-3 link"></em> -->
+                </td>
+              </ng-container>
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">
+                  No se encontro datos 
+                </td>
+              </tr>
+            </table>
+    
+            <!-- <mat-paginator
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page of users"
+            ></mat-paginator> -->
+          </div>
+        </div>
+      </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTN_BACK, BTN_OUT } from 'src/app/core/constants/text.const';
+import { BTN_BACK, BTN_DASHBOARD, BTN_OUT } from 'src/app/core/constants/text.const';
 import { LearningService } from 'src/app/core/services/learning/learning.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class AdminComponent implements OnInit {
   displayModalBG!: boolean;
   btn: string;
   out: string;
-
+  go_dashboard: string;
   menu = [
     {
       header: 'CEBE E-LEARNING',
@@ -31,6 +31,7 @@ export class AdminComponent implements OnInit {
       route: '/admin/rating',
       iconClasses: 'fa fa-rocket',
     },
+
     // {
     //   label: 'Multilevel',
     //   iconClasses: 'fa fa-share',
@@ -78,6 +79,7 @@ export class AdminComponent implements OnInit {
   constructor(private learningService: LearningService) {
     this.btn = BTN_BACK;
     this.out = BTN_OUT;
+    this.go_dashboard = BTN_DASHBOARD;
   }
 
   ngOnInit(): void {

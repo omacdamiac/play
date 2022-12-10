@@ -18,6 +18,7 @@ import { UpdateCategoryComponent } from './module-admin/update-category/update-c
 import { UpdateOptionComponent } from './module-admin/update-option/update-option.component';
 import { AdminGuard } from 'src/app/core/guards/admin.guard';
 import { FilterPipe } from 'src/app/core/pipes/filter.pipe';
+import { SesionComponent } from './module-admin/sesion/sesion.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { FilterPipe } from 'src/app/core/pipes/filter.pipe';
     UpdateUserComponent,
     UpdateCategoryComponent,
     UpdateOptionComponent,
+    SesionComponent,
     NotImageDirective,
     FilterPipe,
   ],

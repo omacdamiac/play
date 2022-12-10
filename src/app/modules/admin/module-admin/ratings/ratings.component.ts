@@ -20,9 +20,7 @@ export class RatingsComponent implements OnInit {
   constructor(
     private ratingService: RatingService,
     private categoryService: CategoryService,
-  ) {
-
-  }
+  ) { }
   ngOnInit(): void {
     this.listCat()
     this.listRaring()
@@ -30,7 +28,10 @@ export class RatingsComponent implements OnInit {
 
   listCat(){
     this.categoryService.getCategories().subscribe({
-    next:  res => this.categories = res
+    next:  res => {
+      console.log(res);
+      
+      this.categories = res}
     })
   }
 

@@ -1,5 +1,6 @@
 export const BTN_OUT = 'Salir X';
 export const BTN_BACK = '< Regresar';
+export const BTN_DASHBOARD = 'A Dashboard'
 export const BTN_NEXT = 'Siguiente >';
 export const BTN_YES = 'SI';
 export const BTN_NOT = 'NO';

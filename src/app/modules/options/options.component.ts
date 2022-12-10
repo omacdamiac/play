@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { UTILS } from 'src/app/commons/utils/utils';
 import {
   BTN_NEXT,
@@ -34,7 +35,7 @@ export class OptionsComponent implements OnInit {
     private route: ActivatedRoute,
     private learningService: LearningService,
     private authService: AuthService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {
     this.display = false;
     this.displayCongratulation = false;
@@ -46,13 +47,26 @@ export class OptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.learningService.getListCategory().pipe(
+    //   distinctUntilChanged(),
+    //   switchMap((value: any) => this.learningService.getOption()
+    // )).subscribe(val => console.log(val)
+    // )
+
     this.learningService.getOption().subscribe({
       next: (response: IOptions[]) => {
+        console.log(response);
+
         this.categoriaCurrent = response.filter((option: any) => {
-          if (option.padreId === Number(this.id)) {            
+          if (
+            option.padreId === Number(this.id) ||
+            Number(option.padreId) === Number(this.id)
+          ) {
             return option;
           }
         });
+        console.log(this.categoriaCurrent);
+
         this.currentItem = this.updateRandomImage();
         this.openDialog(this.categoriaCurrent);
       },
@@ -88,13 +102,13 @@ export class OptionsComponent implements OnInit {
     const count = this.categoriaCurrent.length;
 
     const data = { ...item, ...{ answer: value } };
-    this.validateOption(data);
+    this.validateOption(data, count);
 
     if (count === 0) {
       this.learningService
         .setRating(this.sendRequest(this.learningService.getState()))
         .subscribe();
-      
+
       // this.learningService.clearState();
 
       this.displayCongratulation = true;
@@ -121,8 +135,9 @@ export class OptionsComponent implements OnInit {
     this.learningService.setStateDisplay(false);
   }
 
-  validateOption(data: any) {
-    switch (Number(data.id)) {
+  validateOption(data: any, count: number) {
+    const id = count + 1;
+    switch (id) {
       case 2:
         this.learningService.setState({ item2: data });
         break;
@@ -146,15 +161,30 @@ export class OptionsComponent implements OnInit {
     arr.splice(i, 1);
   }
 
-  sendRequest(obj: any): IRating {    
+  sendRequest(obj: any): IRating {
     const sendData = {
       category: Number(this.id),
+      // category: this.id ? this.setCategory().nombre : '',
       user: UTILS.getUser(this.authService.getToken()).user,
       points: UTILS.points(obj),
       answer: obj,
-    }
-     return sendData;
+    };
+    return sendData;
   }
+  // myCategory: any;
+  // setCategory(): any {
+  //   this.learningService.getListCategory().subscribe({
+  //     next: (response) => {
+  //       return response.filter((cat: any) => {
+  //         if (cat.id == this.id || cat.id == Number(this.id)) {
+  //           console.log(cat);
+            
+  //           return cat;
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
   // ngOnDestroy() {
   //   this.learningService.options.unsubscribe();

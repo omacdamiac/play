@@ -82,8 +82,9 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Opciones</th>
             <td mat-cell *matCellDef="let row">
-                <em (click)="viewModal(row)" class="fa fa-edit h6 link"></em>
-                <em (click)="deleteUser(row.id)" class="fa fa-trash h6 ms-3 link"></em>
+                <em matTooltip="Editar {{ row.user }}" (click)="viewModal(row)" class="fa fa-edit h6 link"></em>
+                <em matTooltip="Eliminar {{ row.user }}" (click)="deleteUser(row.id)" class="fa fa-trash h6 ms-3 link"></em>
+                <em matTooltip="Mostrar sesiones de {{ row.user }}" (click)="sesiones(row)" class="fa fa-list h6 ms-3 link"></em>
             </td>
           </ng-container>
 
